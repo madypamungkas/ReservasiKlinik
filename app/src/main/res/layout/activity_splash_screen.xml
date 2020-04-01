@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SplashScreen">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.scwang.wave.MultiWaveHeader
+            android:id="@+id/waveHeader"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_280sdp"
+            app:mwhCloseColor="@color/colorPrimaryDark"
+            app:mwhColorAlpha="0.5"
+            app:mwhProgress="1"
+            app:mwhStartColor="@color/colorPrimary"
+            app:mwhVelocity="4"
+            app:mwhWaveHeight="@dimen/_60sdp"
+            app:mwhWaves="MultiWave" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/maven_pro_regular"
+            android:text="Nama Klinik"
+            android:textAlignment="center"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white" />
+    </FrameLayout>
+
+
+</RelativeLayout>

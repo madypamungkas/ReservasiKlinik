@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_2sdp"
+    app:cardCornerRadius="@dimen/_26sdp"
+    app:cardElevation="@dimen/_3sdp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+    <LinearLayout
+        android:id="@+id/layoutCard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Tebak"
+            android:visibility="gone"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/titleMenu"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Menu"
+        android:textAlignment="center"
+        android:textColor="#262626"
+        android:textSize="@dimen/_11ssp"
+        android:layout_marginBottom="@dimen/_5sdp"/>
+
+
+</LinearLayout>

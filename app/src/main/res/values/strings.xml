@@ -1,3 +1,63 @@
 <resources>
     <string name="app_name">Reservasi Klinik</string>
+
+    <string name="nav_home">Beranda</string>
+    <string name="nav_chat">Chat</string>
+    <string name="nav_notif">Notifikasi</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_notif2">Notif</string>
+    <string name="nav_account">Akun</string>
+    <string name="nav_order">Riwayat Konsultasi</string>
+    <string name="font_light">sans-serif-light</string>
+    <string name="font_medium">sans-serif-medium</string>
+    <string name="font_bold">sans-serif-bold</string>
+    <string name="date"></string>
+    <string name="notifikasi"><u>1 Notifikasi Baru</u> </string>
+
+
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Sudah Punya Akun? Sign In</string>
+    <string name="login_signup_hint">Buat Akun Baru? Sign Up</string>
+
+    <string name="menu_daftar">Daftar Konsultasi</string>
+    <string name="menu_jadwal">Jadwal Konsultasi</string>
+    <string name="menu_layanan">Daftar Layanan</string>
+    <string name="menu_biodata">Ubah Biodata</string>
+    <string name="menu_payment">Pembayaran Saya</string>
+    <string name="menu_konfirmasi">Konfirmasi Jadwal</string>
+
+    <string name="button_daftarSaya">Daftar untuk Diri Sendiri</string>
+    <string name="button_daftarLain">Daftar untuk Orang Lain</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="nav_top_chat"></string>
+    <string name="fb_app_id">340839459808895</string>
+    <string name="account_kit_client_token">8585eba5a082993332b2c37d80ca404a</string>
+    <string name="ak_login_protocol_scheme">ak8585eba5a082993332b2c37d80ca404a</string>
+    <string name="rekomendasi_sekolah">Pelayanan Assesmen psikologi dan konseling bagi calon siswa  Sekolah</string>
+    <string name="minat_kerja">Pelayanan Assesmen psikologi dan konseling bagi pengembangan individu di dunia kerja</string>
+
+
+    <string name="konsul_anak">Pelayanan Assesmen psikologi dan konseling khusus bagi Anak-anak</string>
+    <string name="konsul_dewasa">Pelayanan Assesmen psikologi dan konseling khusus bagi Remaja dan Dewasa</string>
+    <string name="minatbakat_sekolah">Pelayanan Assesmen psikologi dan konseling bagi \n -Penjurusan IPA/IPS \n -Penjurusan Kuliah</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="pendidikan_terakhir">
+        <item>SD</item>
+        <item>SMP</item>
+        <item>SMA</item>
+        <item>D-III</item>
+        <item>Sarjana</item>
+        <item>S2</item>
+        <item>S3</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="jenis_kelamin">
+        <item>Laki-Laki</item>
+        <item>Perempuan</item>
+    </string-array>
 </resources>
