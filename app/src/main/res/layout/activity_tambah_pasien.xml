@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".TambahPasienActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_50sdp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white_smoke"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_3sdp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/maven_pro_bold"
+                    android:text="Data Saya"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/txtParam1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="No Telepon"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtValue1A"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="081330646518"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <TextView
+                            android:id="@+id/txtValue1B"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Uang Tunai"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_14ssp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/txtParam2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Nama "
+                        android:textAlignment="textStart"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtValue2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Dwi Noviandaru"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_14ssp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutInfo3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/txtParam3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="NIK"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtValue3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="3308176576370007"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_14ssp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutInfo4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/txtParam4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Jenis Kelamin"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtValue4"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Laki-Laki"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_14ssp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white"
+            android:fillViewport="true"
+            android:paddingStart="@dimen/_8sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_40sdp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtIsiData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="4"
+                    android:background="@color/white"
+                    android:fontFamily="@font/maven_pro_regular"
+                    android:text="Isi Data"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_10sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Nomor Handphone"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layoutNomorHp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:hint="Nomor Handphone"
+                            android:textColorHint="@color/gray"
+                            app:boxBackgroundColor="@android:color/transparent"
+                            app:boxStrokeColor="@color/gray"
+                            app:boxStrokeErrorColor="@color/red"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:errorTextColor="@color/black"
+                            app:hintTextColor="@color/gray">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputHp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/black"
+                                android:textCursorDrawable="@drawable/cursor_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Nama Lengkap"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layoutNama"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:hint="Nama Lengkap"
+                            android:textColorHint="@color/gray"
+                            app:boxBackgroundColor="@android:color/transparent"
+                            app:boxStrokeColor="@color/gray"
+                            app:boxStrokeErrorColor="@color/red"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:errorTextColor="@color/black"
+                            app:hintTextColor="@color/gray">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputNama"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/black"
+                                android:textCursorDrawable="@drawable/cursor_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="NIK"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layoutNomor"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:hint="NIK"
+                            android:textColorHint="@color/gray"
+                            app:boxBackgroundColor="@android:color/transparent"
+                            app:boxStrokeColor="@color/gray"
+                            app:boxStrokeErrorColor="@color/red"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:errorTextColor="@color/black"
+                            app:hintTextColor="@color/gray">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputNomor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/black"
+                                android:textCursorDrawable="@drawable/cursor_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Nomor BPJS"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layoutBpjs"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:hint="NIK"
+                            android:textColorHint="@color/gray"
+                            app:boxBackgroundColor="@android:color/transparent"
+                            app:boxStrokeColor="@color/gray"
+                            app:boxStrokeErrorColor="@color/red"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:errorTextColor="@color/black"
+                            app:hintTextColor="@color/gray">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputBPJS"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textColor="@color/black"
+                                android:textCursorDrawable="@drawable/cursor_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Jenis Kelamin"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <Spinner
+                            android:id="@+id/spKelamin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/kelamin"
+                            android:paddingTop="@dimen/_16sdp"
+                            android:paddingBottom="@dimen/_16sdp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Alamat"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layoutAlamat"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:hint="Alamat"
+                            android:textColorHint="@color/gray"
+                            app:boxBackgroundColor="@android:color/transparent"
+                            app:boxStrokeColor="@color/gray"
+                            app:boxStrokeErrorColor="@color/red"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:errorTextColor="@color/black"
+                            app:hintTextColor="@color/gray">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputAlamat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textColor="@color/black"
+                                android:textCursorDrawable="@drawable/cursor_color"
+                                android:textSize="@dimen/_12ssp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|end"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/_7sdp"
+            android:text="Simpan"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

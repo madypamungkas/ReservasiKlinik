@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginBottom="@dimen/_8sdp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:weightSum="5">
+        <RelativeLayout
+            android:id="@+id/layout_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/txtInisial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="AF"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/layout_icon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_weight="4"
+                android:fontFamily="@font/maven_pro_regular"
+                android:text="Nama"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/txtNomor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_weight="4"
+                android:fontFamily="@font/maven_pro_regular"
+                android:text="08130101010123"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_2sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:tint="@color/gray" />
+        <RadioButton
+            android:id="@+id/rbChoose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutMore"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLaporan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto_bold"
+            android:onClick="processDaftar"
+            android:padding="@dimen/_3sdp"
+            android:text="Laporan Harian"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11sdp"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_note_add_black_24dp"
+            app:iconGravity="start" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@color/primaryTextColor"
+            android:fontFamily="@font/roboto_bold"
+            android:onClick="processDaftar"
+            android:padding="@dimen/_3sdp"
+            android:text="Edit"
+            android:textColor="@color/primaryTextColor"
+            app:backgroundTint="@color/white"
+            android:textSize="@dimen/_10sdp"
+            app:strokeColor="@color/primaryTextColor"
+            app:strokeWidth="@dimen/_2sdp"
+            app:icon="@drawable/ic_edit_black_24dp"
+            app:iconTint="@color/primaryTextColor"
+            app:iconGravity="textStart" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@color/primaryTextColor"
+            android:fontFamily="@font/roboto_bold"
+            android:onClick="processDaftar"
+            android:padding="@dimen/_3sdp"
+            android:text="Hapus"
+            android:textColor="@color/red"
+            app:strokeColor="@color/red"
+            app:strokeWidth="@dimen/_2sdp"
+            app:backgroundTint="@color/white"
+            android:textSize="@dimen/_10sdp"
+            app:icon="@drawable/ic_delete_black_24dp"
+            app:iconTint="@color/red"
+            app:iconGravity="textStart" />
+    </LinearLayout>
+
+</LinearLayout>
