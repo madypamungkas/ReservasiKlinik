@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataPasien">
+    tools:context=".ListPasienAcitivity">
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
@@ -14,8 +14,8 @@
         android:layout_marginBottom="@dimen/_15sdp"
         android:layout_weight="4"
         android:fontFamily="@font/maven_pro_bold"
-        android:text="Data Pasien"
-        android:textAlignment="textStart"
+        android:text="Pilih Data Pasien"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_14ssp" />
 
@@ -114,6 +114,7 @@
             android:background="@color/white"
             android:gravity="center_vertical|end"
             android:layout_alignParentEnd="true"
+            android:visibility="visible"
             android:layout_alignParentBottom="true">
 
             <com.google.android.material.button.MaterialButton

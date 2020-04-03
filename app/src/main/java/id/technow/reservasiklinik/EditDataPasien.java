@@ -6,8 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -17,23 +17,24 @@ import org.json.JSONObject;
 
 import id.technow.reservasiklinik.API.RetrofitClient;
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
-import id.technow.reservasiklinik.Model.ResponseLogin;
 import id.technow.reservasiklinik.Model.UserModel;
 import id.technow.reservasiklinik.Storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TambahPasienActivity extends AppCompatActivity {
+public class EditDataPasien extends AppCompatActivity {
     private TextInputLayout layoutNIK, layoutBpjs, layoutNomorHp, layoutNama;
     private TextInputEditText inputHp, inputNama, inputNIK, inputBPJS;
     ProgressDialog loading;
-
+    String id;
+    private TextView txthp, txtnama, txtnik, txtnoBpjs;
+    String txtNamaSt, txthpSt, txtnikSt, txtnoBpjsSt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tambah_pasien);
+        setContentView(R.layout.activity_edit_data_pasien);
         inputHp = findViewById(R.id.inputHp);
         inputNama = findViewById(R.id.inputNama);
         inputNIK = findViewById(R.id.inputNIK);
@@ -42,6 +43,40 @@ public class TambahPasienActivity extends AppCompatActivity {
         layoutBpjs = findViewById(R.id.layoutBpjs);
         layoutNomorHp = findViewById(R.id.layoutNomorHp);
         layoutNama = findViewById(R.id.layoutNama);
+        id = getIntent().getStringExtra("idPasien");
+        txthp = findViewById(R.id.txtValue1A);
+        txtnama = findViewById(R.id.txtValue2);
+        txtnik = findViewById(R.id.txtValue3);
+        txtnoBpjs = findViewById(R.id.txtValue4);
+
+        txtNamaSt  = getIntent().getStringExtra("namaPasien");
+        txtnikSt  = getIntent().getStringExtra("nikPasien");
+        txthpSt  = getIntent().getStringExtra("hpPasien");
+        txtnoBpjsSt  = getIntent().getStringExtra("bpjsPasien");
+
+        if (txtNamaSt == null){
+            txtnama.setText("-");
+        }else{
+            txtnama.setText(txtNamaSt);
+            inputNama.setText(txtNamaSt);
+        }if (txtnikSt == null){
+            txtnik.setText("-");
+        }else{
+            txtnik.setText(txtnikSt);
+            inputNIK.setText(txtnikSt);
+        }if (txthpSt == null){
+            txthp.setText("-");
+        }else{
+            txthp.setText(txthpSt);
+            inputHp.setText(txthpSt);
+        }
+        if (txtnoBpjsSt == null) {
+            txtnoBpjs.setText("-");
+        } else {
+            txtnoBpjs.setText(txtnoBpjsSt);
+            inputBPJS.setText(txtnoBpjsSt);
+        }
+
 
     }
 
@@ -49,13 +84,13 @@ public class TambahPasienActivity extends AppCompatActivity {
         UserModel user = SharedPrefManager.getInstance(this).getUser();
         String token = "Bearer " + user.getToken();
 
-        loading = ProgressDialog.show(TambahPasienActivity.this, null, getString(R.string.please_wait), true, false);
+        loading = ProgressDialog.show(EditDataPasien.this, null, getString(R.string.please_wait), true, false);
         String noHp = inputHp.getText().toString().trim();
         String nama = inputNama.getText().toString().trim();
         String nik = inputNIK.getText().toString().trim();
         String bpjs = inputBPJS.getText().toString().trim();
 
-        if ( noHp.length()< 10 ||  noHp.length()> 12) {
+        if (noHp.length() < 10 || noHp.length() > 12) {
             loading.dismiss();
             layoutNomorHp.setError("No HP Terdiri Dari 10 - 12 Karakter");
             inputHp.requestFocus();
@@ -79,7 +114,7 @@ public class TambahPasienActivity extends AppCompatActivity {
             inputNIK.requestFocus();
             return;
         }
-        if (nik.length() != 16 ) {
+        if (nik.length() != 16) {
             loading.dismiss();
             layoutNIK.setError("No NIK Harus Berisi 16");
             inputNIK.requestFocus();
@@ -95,7 +130,7 @@ public class TambahPasienActivity extends AppCompatActivity {
         Call<ResponseEditPasien> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .tambahPasien("application/json", token, nama, noHp, nik, bpjs);
+                .updatePasien("application/json", token, id, nama, noHp, nik, bpjs);
 
         call.enqueue(new Callback<ResponseEditPasien>() {
             @Override
@@ -106,7 +141,7 @@ public class TambahPasienActivity extends AppCompatActivity {
                     if (responseEditPasien.getStatus().equals("success")) {
                         Log.i("debug", "onResponse: SUCCESS");
                         loading.dismiss();
-                        Intent intent = new Intent(TambahPasienActivity.this, DataPasien.class);
+                        Intent intent = new Intent(EditDataPasien.this, DataPasien.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     } else {
@@ -118,9 +153,9 @@ public class TambahPasienActivity extends AppCompatActivity {
                     loading.dismiss();
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(TambahPasienActivity.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditDataPasien.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
-                        Toast.makeText(TambahPasienActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditDataPasien.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -129,7 +164,7 @@ public class TambahPasienActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseEditPasien> call, Throwable t) {
                 Log.e("debug", "onFailure: ERROR > " + t.toString());
                 loading.dismiss();
-                Toast.makeText(TambahPasienActivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditDataPasien.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -52,8 +52,8 @@
                     android:text="UKPsikologi"
                     android:fontFamily="@font/maven_pro_regular"
                     android:layout_marginTop="@dimen/_40sdp"/>
-                <include
-                    layout="@layout/layout_login"/>
+
+                <include layout="@layout/layout_login" />
 
             </LinearLayout>
             <ImageView

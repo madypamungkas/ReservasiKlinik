@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".TambahPasienActivity">
+    tools:context=".EditDataPasien">
 
 
     <LinearLayout
@@ -24,7 +24,6 @@
             app:cardBackgroundColor="@color/white_smoke"
             app:cardCornerRadius="@dimen/_8sdp"
             app:cardElevation="@dimen/_3sdp"
-            android:visibility="gone"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -40,7 +39,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_weight="4"
                     android:fontFamily="@font/maven_pro_bold"
-                    android:text="Data Saya"
+                    android:text="Data Pasien"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
@@ -189,7 +188,7 @@
                         android:layout_marginTop="@dimen/_15sdp"
                         android:layout_weight="1"
                         android:fontFamily="@font/maven_pro_regular"
-                        android:text="Jenis Kelamin"
+                        android:text="Nomor BPJS"
                         android:textAlignment="textStart"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_14ssp" />
@@ -246,7 +245,7 @@
                     android:layout_weight="4"
                     android:background="@color/white"
                     android:fontFamily="@font/maven_pro_regular"
-                    android:text="Tambah Data"
+                    android:text="Ubah Data"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />

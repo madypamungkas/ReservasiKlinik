@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import id.technow.reservasiklinik.API.RetrofitClient;
 import id.technow.reservasiklinik.Adapter.DataPasienAdapter;
-import id.technow.reservasiklinik.Model.DataPasienModel;
+import id.technow.reservasiklinik.Adapter.ListPasienAdapter;
 import id.technow.reservasiklinik.Model.PasienModel;
 import id.technow.reservasiklinik.Model.ResponseListPasien;
 import id.technow.reservasiklinik.Model.UserModel;
@@ -23,15 +23,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DataPasien extends AppCompatActivity {
+public class ListPasienAcitivity extends AppCompatActivity {
     private RecyclerView rvPasien;
     ArrayList<PasienModel> model;
-    DataPasienAdapter adapter;
+    ListPasienAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_pasien);
+        setContentView(R.layout.activity_list_pasien_acitivity);
         rvPasien = findViewById(R.id.rvPasien);
         loadData();
     }
@@ -39,7 +39,7 @@ public class DataPasien extends AppCompatActivity {
     private void loadData() {
         UserModel user = SharedPrefManager.getInstance(this).getUser();
         String token = "Bearer " + user.getToken();
-        Call<ResponseListPasien> call = RetrofitClient.getInstance().getApi().pasien( "application/json", token);
+        Call<ResponseListPasien> call = RetrofitClient.getInstance().getApi().pasien("application/json", token);
         call.enqueue(new Callback<ResponseListPasien>() {
             @Override
             public void onResponse(Call<ResponseListPasien> call, Response<ResponseListPasien> response) {
@@ -48,24 +48,24 @@ public class DataPasien extends AppCompatActivity {
                     int size = listPasien.getPasien().size();
                     model = response.body().getPasien();
                     if (model.isEmpty()) {
-                        Toast.makeText(DataPasien.this, "Pasien Tidak Tersedia", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListPasienAcitivity.this, "Pasien Tidak Tersedia", Toast.LENGTH_SHORT).show();
                     } else {
                         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
-                        adapter = new DataPasienAdapter(DataPasien.this, model);
-                        rvPasien.setLayoutManager(new LinearLayoutManager(DataPasien.this));
+                        adapter = new ListPasienAdapter(ListPasienAcitivity.this, model);
+                        rvPasien.setLayoutManager(new LinearLayoutManager(ListPasienAcitivity.this));
                         rvPasien.setLayoutManager(staggeredGridLayoutManager);
                         rvPasien.setAdapter(adapter);
                     }
 
                 } else {
-                    Toast.makeText(DataPasien.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListPasienAcitivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseListPasien> call, Throwable t) {
 
-                Toast.makeText(DataPasien.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListPasienAcitivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -73,7 +73,7 @@ public class DataPasien extends AppCompatActivity {
     }
 
     public void tambahAnggota(View view) {
-        Intent intent = new Intent(DataPasien.this, TambahPasienActivity.class);
+        Intent intent = new Intent(ListPasienAcitivity.this, TambahPasienActivity.class);
         startActivity(intent);
     }
 }

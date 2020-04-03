@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataPasien">
+    tools:context=".ScreeningActivity">
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
@@ -14,13 +14,56 @@
         android:layout_marginBottom="@dimen/_15sdp"
         android:layout_weight="4"
         android:fontFamily="@font/maven_pro_bold"
-        android:text="Data Pasien"
-        android:textAlignment="textStart"
+        android:text="Screening Covid-19"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_14ssp" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:orientation="horizontal"
         android:layout_below="@+id/txtTitle"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:fontFamily="@font/roboto_medium"
+            android:text="No"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/tvSoal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Pertanyaan"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/tvAns"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Jawaban"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/header"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -127,7 +170,7 @@
                 android:padding="@dimen/_7sdp"
                 android:background="@color/colorPrimary"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Tambah Pasien"
+                android:text="Simpan Data"
                 android:onClick="tambahAnggota"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />

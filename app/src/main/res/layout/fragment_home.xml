@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/menuRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_120sdp"
             android:background="@color/colorPrimaryDark" />
+
         <RelativeLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_4sdp"
-            >
+            android:layout_margin="@dimen/_4sdp">
+
             <TextView
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="wrap_content"
@@ -29,23 +38,23 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp"
                 android:textStyle="bold" />
+
             <ImageView
-                android:visibility="gone"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentEnd="true"
-                />
+                android:visibility="gone" />
 
         </RelativeLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/carousel"
-            android:layout_below="@id/header"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_below="@id/header"
             android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
             app:cardCornerRadius="@dimen/_8sdp"
             app:cardUseCompatPadding="true">
 
@@ -57,38 +66,39 @@
                 app:sliderAutoCycleDirection="right"
                 app:sliderAutoCycleEnabled="true"
                 app:sliderCircularHandlerEnabled="true"
-                app:sliderIndicatorAnimationDuration="1000">
-            </com.smarteist.autoimageslider.SliderView>
+                app:sliderIndicatorAnimationDuration="1000"></com.smarteist.autoimageslider.SliderView>
 
         </com.google.android.material.card.MaterialCardView>
-        <androidx.core.widget.NestedScrollView
-            android:layout_below="@id/carousel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
+
+
             <LinearLayout
+                android:layout_below="@id/carousel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/acountInfo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     app:cardCornerRadius="@dimen/_8sdp"
                     app:cardUseCompatPadding="true">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:weightSum="1">
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="0.8">
+                            android:layout_weight="0.8"
+                            android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -99,16 +109,17 @@
                                 android:text="Informasi Akun"
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/_14ssp"
-                                android:textStyle="bold" >
+                                android:textStyle="bold">
 
                             </TextView>
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_1sdp"
-                                android:layout_marginEnd="@dimen/_8sdp"
                                 android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
                                 android:background="@color/gray" />
+
                             <TextView
                                 android:id="@+id/tvName"
                                 android:layout_width="match_parent"
@@ -118,36 +129,36 @@
                                 android:text="Nama Klien"
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/_12ssp"
-                                android:textStyle="bold" >
-                            </TextView>
+                                android:textStyle="bold"></TextView>
+
                             <TextView
                                 android:id="@+id/tvPhone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_4sdp"
                                 android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
                                 android:fontFamily="@font/maven_pro_regular"
                                 android:text="081231231234"
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/_12ssp"
-                                android:textStyle="bold" >
-                            </TextView>
+                                android:textStyle="bold"></TextView>
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="0.2"
-                            android:gravity="center"
-                            android:layout_gravity="center">
+                            android:gravity="center">
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/imgProfile"
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/ic_person_black_24dp"
-                                android:layout_gravity="center"
                                 app:civ_border_color="@color/gray"
                                 app:civ_border_width="1dp" />
                         </LinearLayout>
@@ -155,36 +166,40 @@
 
 
                 </com.google.android.material.card.MaterialCardView>
+
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_13sdp"
                     android:fillViewport="true">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/RVmain"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_8sdp"
                             android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
                             android:nestedScrollingEnabled="false"
                             android:orientation="vertical"
                             android:scrollbarThumbHorizontal="@null"
-                            android:scrollbarThumbVertical="@null">
-                        </androidx.recyclerview.widget.RecyclerView>
+                            android:scrollbarThumbVertical="@null"></androidx.recyclerview.widget.RecyclerView>
 
                     </RelativeLayout>
                 </androidx.core.widget.NestedScrollView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    android:layout_marginStart="@dimen/_8sdp">
+                    android:visibility="gone">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -195,25 +210,27 @@
                         android:text="Psikolog Terdekat"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" >
-                    </TextView>
+                        android:textStyle="bold"></TextView>
+
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fillViewport="true">
+
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <androidx.recyclerview.widget.RecyclerView
 
                                 android:id="@+id/nearPsikologRV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_8sdp"
                                 android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
                                 android:nestedScrollingEnabled="false"
                                 android:orientation="vertical"
                                 android:scrollbarThumbHorizontal="@null"
@@ -225,10 +242,173 @@
                         </RelativeLayout>
                     </androidx.core.widget.NestedScrollView>
                 </LinearLayout>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/RVmain"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:cardBackgroundColor="@color/white_smoke"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/maven_pro_bold"
+                            android:text="Data Corona Indonesia"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/txtParam1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maven_pro_regular"
+                                android:text="Kasusu Positif"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtValue1A"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/maven_pro_regular"
+                                    android:text="081330646518"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_14ssp" />
+
+                                <TextView
+                                    android:id="@+id/txtValue1B"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/maven_pro_regular"
+                                    android:text="Uang Tunai"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/txtParam2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maven_pro_regular"
+                                android:text="Kasus Sembuh "
+                                android:textAlignment="textStart"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtValue2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/maven_pro_regular"
+                                    android:text="Dwi Noviandaru"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_14ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutInfo3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/txtParam3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maven_pro_regular"
+                                android:text="Kasus Meninggal"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtValue3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/maven_pro_regular"
+                                    android:text="3308176576370007"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_14ssp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+
+
     </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

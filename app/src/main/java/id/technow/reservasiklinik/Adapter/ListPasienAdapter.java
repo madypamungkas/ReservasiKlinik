@@ -17,31 +17,30 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
-import id.technow.reservasiklinik.DataPasien;
 import id.technow.reservasiklinik.EditDataPasien;
-import id.technow.reservasiklinik.Model.DataPasienModel;
 import id.technow.reservasiklinik.Model.PasienModel;
 import id.technow.reservasiklinik.R;
+import id.technow.reservasiklinik.ReservasiActivity;
 
-public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.PasienVH>  {
+public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.ListPasienVH> {
     private int mSelectedItem = -1;
     Context mCtx;
     ArrayList<PasienModel> dataPasienModels;
 
-    public DataPasienAdapter(Context mCtx, ArrayList<PasienModel> dataPasienModels) {
+    public ListPasienAdapter(Context mCtx, ArrayList<PasienModel> dataPasienModels) {
         this.mCtx = mCtx;
         this.dataPasienModels = dataPasienModels;
     }
 
     @NonNull
     @Override
-    public PasienVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListPasienVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_data_orang, parent, false);
-        return new PasienVH(view);
+        return new ListPasienVH(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PasienVH holder, int position) {
+    public void onBindViewHolder(@NonNull final ListPasienVH holder, int position) {
         final PasienModel model = dataPasienModels.get(position);
         holder.txtName.setText(model.getNama());
         holder.txtNomor.setText(model.getNo_bpjs());
@@ -55,13 +54,28 @@ public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.Pa
             }
         });
         if (position == mSelectedItem) {
-            holder.layoutMore.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(mCtx, ReservasiActivity.class);
+            intent.putExtra("idPasien", model.getId().toString());
+            intent.putExtra("namaPasien", model.getNama());
+            intent.putExtra("nikPasien", model.getNik());
+            intent.putExtra("bpjsPasien", model.getNo_bpjs());
+            intent.putExtra("hpPasien", model.getNo_telepon());
+            mCtx.startActivity(intent);
+            // holder.layoutMore.setVisibility(View.VISIBLE);
         } else {
-            holder.layoutMore.setVisibility(View.GONE);
+            //holder.layoutMore.setVisibility(View.GONE);
         }
         if (holder.rbChoose.isChecked()) {
-            holder.layoutMore.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(mCtx, ReservasiActivity.class);
+            intent.putExtra("idPasien", model.getId().toString());
+            intent.putExtra("namaPasien", model.getNama());
+            intent.putExtra("nikPasien", model.getNik());
+            intent.putExtra("bpjsPasien", model.getNo_bpjs());
+            intent.putExtra("hpPasien", model.getNo_telepon());
+            mCtx.startActivity(intent);
+            //holder.layoutMore.setVisibility(View.VISIBLE);
         }
+         /*
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +87,7 @@ public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.Pa
                 intent.putExtra("hpPasien", model.getNo_telepon());
                 mCtx.startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override
@@ -81,7 +95,7 @@ public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.Pa
         return dataPasienModels.size();
     }
 
-    class PasienVH extends RecyclerView.ViewHolder {
+    class ListPasienVH extends RecyclerView.ViewHolder {
         TextView txtNomor, txtName, txtInisial;
         ImageButton image;
         LinearLayout layoutMore;
@@ -89,9 +103,8 @@ public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.Pa
         RadioButton rbChoose;
         MaterialButton btnLaporan, btnEdit, btnDelete;
 
-        public PasienVH(@NonNull View itemView) {
+        public ListPasienVH(@NonNull View itemView) {
             super(itemView);
-
             rbChoose = itemView.findViewById(R.id.rbChoose);
             txtNomor = itemView.findViewById(R.id.txtNomor);
             btnLaporan = itemView.findViewById(R.id.btnLaporan);
@@ -112,6 +125,7 @@ public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.Pa
             itemView.setOnClickListener(l);
         }
     }
+
     private String getInitials(String name) {
         String[] nameParts = name.split(" ");
         String firstName = nameParts[0];

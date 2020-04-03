@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_smoke"
+    android:orientation="vertical"
+    tools:context=".ReservasiActivity">
+
+
+    <TextView
+        android:id="@+id/txtTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/maven_pro_regular"
+        android:text="Reservasi Klinik"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/carousel"
+        android:layout_below="@+id/txtTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_weight="4"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="Data Pasien"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtParam1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/maven_pro_regular"
+                    android:text="No Telepon"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14ssp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtValue1A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="081330646518"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <TextView
+                        android:id="@+id/txtValue1B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Uang Tunai"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtParam2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/maven_pro_regular"
+                    android:text="Nama "
+                    android:textAlignment="textStart"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14ssp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtValue2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Dwi Noviandaru"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutInfo3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtParam3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/maven_pro_regular"
+                    android:text="NIK"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14ssp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtValue3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="3308176576370007"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutInfo4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtParam4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/maven_pro_regular"
+                    android:text="Nomor BPJS"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14ssp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtValue4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Laki-Laki"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14ssp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/menuRV"
+        android:layout_below="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_60sdp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_weight="4"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:text="Pilih Reservasi"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_weight="4"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Keluhan"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutKeluhan"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="Keluhan"
+                        android:textColorHint="@color/gray"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/gray"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:errorTextColor="@color/black"
+                        app:hintTextColor="@color/gray">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputKeluhan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:lines="5"
+                            android:minLines="4"
+                            android:textColor="@color/black"
+                            android:textCursorDrawable="@drawable/cursor_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Tanggal"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnTanggal"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:background="@color/colorPrimaryDark"
+                                android:fontFamily="@font/roboto_bold"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:text="Pilih Tanggal"
+                                android:onClick="pickTanggal"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="@dimen/_10sdp"
+                                app:backgroundTint="@color/white"
+                                app:iconGravity="textStart"
+                                app:iconTint="@color/primaryTextColor"
+                                app:strokeColor="@color/colorPrimaryDark"
+                                app:strokeWidth="@dimen/_1sdp" />
+
+                            <TextView
+                                android:id="@+id/txtTanggal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maven_pro_regular"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Tanggal"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Jam"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnJam"
+                                android:enabled="false"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:background="@color/colorPrimaryDark"
+                                android:fontFamily="@font/roboto_bold"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:text="Pilih Jam"
+                                android:onClick="pickJam"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="@dimen/_10sdp"
+                                app:backgroundTint="@color/white"
+                                app:iconGravity="textStart"
+                                app:iconTint="@color/primaryTextColor"
+                                app:strokeColor="@color/colorPrimaryDark"
+                                app:strokeWidth="@dimen/_1sdp" />
+
+                            <TextView
+                                android:id="@+id/txtJam"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maven_pro_regular"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Jam"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <androidx.core.widget.NestedScrollView
+                        android:visibility="gone"
+                        android:id="@+id/nestedJam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fillViewport="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/RVJam"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:nestedScrollingEnabled="false"
+                                android:orientation="vertical"
+                                android:scrollbarThumbHorizontal="@null"
+                                android:scrollbarThumbVertical="@null"></androidx.recyclerview.widget.RecyclerView>
+
+                        </RelativeLayout>
+                    </androidx.core.widget.NestedScrollView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:alpha="0.7"
+                        android:background="@color/gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/maven_pro_regular"
+                            android:text="Sesi"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSesi"
+                                android:enabled="false"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:background="@color/colorPrimaryDark"
+                                android:fontFamily="@font/roboto_bold"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:text="Pilih Sesi"
+                                android:onClick="pickSesi"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="@dimen/_10sdp"
+                                app:backgroundTint="@color/white"
+                                app:iconGravity="textStart"
+                                app:iconTint="@color/primaryTextColor"
+                                app:strokeColor="@color/colorPrimaryDark"
+                                app:strokeWidth="@dimen/_1sdp" />
+
+                            <TextView
+                                android:id="@+id/txtSesi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maven_pro_regular"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:text="Sesi"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.core.widget.NestedScrollView
+                        android:visibility="gone"
+                        android:id="@+id/nestedSesi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fillViewport="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/RVSesi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:nestedScrollingEnabled="false"
+                                android:orientation="vertical"
+                                android:scrollbarThumbHorizontal="@null"
+                                android:scrollbarThumbVertical="@null"></androidx.recyclerview.widget.RecyclerView>
+
+                        </RelativeLayout>
+                    </androidx.core.widget.NestedScrollView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|end"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/_7sdp"
+            android:text="Simpan"
+            android:enabled="false"
+            android:onClick="saveReservasi"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
+</RelativeLayout>

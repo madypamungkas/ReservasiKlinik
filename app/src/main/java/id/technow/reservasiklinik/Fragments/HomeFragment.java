@@ -1,6 +1,7 @@
 package id.technow.reservasiklinik.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,9 +24,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.technow.reservasiklinik.API.RetrofitClient;
+import id.technow.reservasiklinik.API.RetrofitCorona;
 import id.technow.reservasiklinik.Adapter.MenuHomeAdapter;
 import id.technow.reservasiklinik.Model.MenuHomeModel;
+import id.technow.reservasiklinik.Model.ResponseCorona;
+import id.technow.reservasiklinik.Model.ResponseEditPasien;
+import id.technow.reservasiklinik.Model.UserModel;
 import id.technow.reservasiklinik.R;
+import id.technow.reservasiklinik.Storage.SharedPrefManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -40,6 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     /* HomeSliderViewAdapter sliderAdapter;
      ArrayList<BannerModel> bannerModel = null;*/
     Context mCtx;
+    private TextView txtKasus, txtSembuh, txtMeninggal;
 
     public HomeFragment() {
     }
@@ -60,15 +71,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         slider = fragmentView.findViewById(R.id.banner_slider);
         nearPsikologRV = fragmentView.findViewById(R.id.nearPsikologRV);
 
+        txtKasus = fragmentView.findViewById(R.id.txtValue1A);
+        txtSembuh = fragmentView.findViewById(R.id.txtValue2);
+        txtMeninggal = fragmentView.findViewById(R.id.txtValue3);
+
+        UserModel userModel = SharedPrefManager.getInstance(getActivity()).getUser();
+        tvName.setText(userModel.getName());
 
         models = new ArrayList<>();
-        models.add(new MenuHomeModel(1, R.drawable.btn_daftar_konsultasi, "Daftar Klinik"));
+        models.add(new MenuHomeModel(1, R.drawable.btn_daftar_konsultasi, "Reservasi Klinik"));
         models.add(new MenuHomeModel(2, R.drawable.btn_jadwal, "Jadwal Pemerikasaan"));
-        //  models.add(new MenuHomeModel(3,  R.drawable.btn_konfirmasi, "Konfirmasi Jadwal"));
-        // models.add(new MenuHomeModel(5,  R.drawable.btn_pembayaran, "Pembayaran Saya"));
-        models.add(new MenuHomeModel(6, R.drawable.btn_biodata, "List Pasien"));
-        models.add(new MenuHomeModel(4,  R.drawable.btn_layanan, "Screening\n Covid-19"));
-
+        models.add(new MenuHomeModel(3, R.drawable.btn_biodata, "List Pasien"));
+        models.add(new MenuHomeModel(4, R.drawable.btn_layanan, "Screening\n Covid-19"));
 
         menuRV = fragmentView.findViewById(R.id.RVmain);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
@@ -80,7 +94,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // loadNearPsikolog();
        /* loadBanner();
         loadDetails();*/
+        getCorona();
         return fragmentView;
+    }
+
+    public void getCorona() {
+        Call<ArrayList<ResponseCorona>> call = RetrofitCorona
+                .getInstance()
+                .getApi()
+                .coronaIndo("application/json");
+        call.enqueue(new Callback<ArrayList<ResponseCorona>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ResponseCorona>> call, Response<ArrayList<ResponseCorona>> response) {
+                if (response.isSuccessful()) {
+                    ResponseCorona responseCorona = response.body().get(0);
+                    txtKasus.setText(responseCorona.getPositif() + " Kasus");
+                    txtSembuh.setText(responseCorona.getSembuh() + " Kasus");
+                    txtMeninggal.setText(responseCorona.getMeninggal() + " Kasus");
+                } else {
+                    Toast.makeText(getActivity(), response.code() + " ", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ResponseCorona>> call, Throwable t) {
+                Toast.makeText(getActivity(), t.toString() + " ", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 /*
 
