@@ -14,41 +14,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import id.technow.reservasiklinik.Model.JamModel;
+import id.technow.reservasiklinik.Model.PoliModel;
 import id.technow.reservasiklinik.R;
 import id.technow.reservasiklinik.ReservasiActivity;
 
-public class JamAdapter extends RecyclerView.Adapter<JamAdapter.JamVH> {
+public class PoliAdapter extends RecyclerView.Adapter<PoliAdapter.PoliVH> {
     Context mCtx;
-    ArrayList<JamModel> jamModels;
+    ArrayList<PoliModel> poliModels;
     private int mSelectedItem = -1;
 
-    public JamAdapter(Context mCtx, ArrayList<JamModel> jamModels) {
+    public PoliAdapter(Context mCtx, ArrayList<PoliModel> poliModels) {
         this.mCtx = mCtx;
-        this.jamModels = jamModels;
+        this.poliModels = poliModels;
     }
 
     @NonNull
     @Override
-    public JamVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PoliVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_jam_sesi, parent, false);
-        JamVH holder = new JamVH(view);
-        return new JamVH(view);
+        PoliVH holder = new PoliVH(view);
+        return new PoliVH(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JamVH holder, int position) {
-        JamModel jam = jamModels.get(position);
-        holder.tvSchool.setText(jam.getJam());
+    public void onBindViewHolder(@NonNull PoliVH holder, int position) {
+        PoliModel Poli = poliModels.get(position);
+        holder.tvSchool.setText(Poli.getPoli());
         if (position == mSelectedItem) {
             holder.placeA.setCardBackgroundColor(Color.parseColor("#FFB100"));
             if (mCtx instanceof ReservasiActivity) {
-                ((ReservasiActivity) mCtx).jamSetting(jam.getJam()+" WIB", jam.getId());
+                ((ReservasiActivity) mCtx).PoliSetting("Poli "+Poli.getPoli(), Poli.getId());
             }
-           /* if (mCtx instanceof ChangeProfile) {
-                ((ChangeProfile) mCtx).setTextSch(schools.getText(), schools.getId());
-                fragment.hideState();
-            }*/
+
         } else {
 
         }
@@ -56,17 +53,17 @@ public class JamAdapter extends RecyclerView.Adapter<JamAdapter.JamVH> {
 
     @Override
     public int getItemCount() {
-        return jamModels.size();
+        return poliModels.size();
     }
 
-    class JamVH extends RecyclerView.ViewHolder {
+    class PoliVH extends RecyclerView.ViewHolder {
         TextView tvSchool;
         RadioButton rbChoose;
         public int id;
         public String school;
         CardView placeA;
 
-        public JamVH(@NonNull View itemView) {
+        public PoliVH(@NonNull View itemView) {
             super(itemView);
             tvSchool = itemView.findViewById(R.id.tvSchool);
             rbChoose = itemView.findViewById(R.id.rbChoose);
@@ -76,7 +73,7 @@ public class JamAdapter extends RecyclerView.Adapter<JamAdapter.JamVH> {
                 @Override
                 public void onClick(View v) {
                     mSelectedItem = getAdapterPosition();
-                    notifyItemRangeChanged(0, jamModels.size());
+                    notifyItemRangeChanged(0, poliModels.size());
                     notifyDataSetChanged();
 
                 }

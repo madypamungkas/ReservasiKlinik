@@ -1,12 +1,15 @@
 package id.technow.reservasiklinik.API;
 
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
-import id.technow.reservasiklinik.Model.ResponseJam;
+import id.technow.reservasiklinik.Model.ResponsePoli;
 import id.technow.reservasiklinik.Model.ResponseListPasien;
 import id.technow.reservasiklinik.Model.ResponseLogin;
+import id.technow.reservasiklinik.Model.ResponsePostReservasi;
+import id.technow.reservasiklinik.Model.ResponsePostScreening;
 import id.technow.reservasiklinik.Model.ResponseScreening;
-import id.technow.reservasiklinik.Model.ResponseSesi;
+import id.technow.reservasiklinik.Model.ResponseTanggal;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -20,6 +23,13 @@ public interface Api {
     @FormUrlEncoded
     @POST("login")
     Call<ResponseLogin> loginUser(
+            @Field("email") String email,
+            @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<ResponseLogin> registerUser(
+            @Field("nama") String nama,
             @Field("email") String email,
             @Field("password") String password);
 
@@ -59,31 +69,39 @@ public interface Api {
     );
 
     @FormUrlEncoded
-    @POST("reservasi/store/{id_pasien}")
-    Call<ResponseEditPasien> addReservasi(
+    @POST("reservasi/store/{pasien_id}")
+    Call<ResponsePostReservasi> addReservasi(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
-            @Path("id_pasien") String id_pasien,
-            @Field("keluhan") String keluhan,
+            @Path("pasien_id") String id_pasien,
+            @Field("keluhan") String keluhan_fisik,
+            @Field("riwayat_penyakit_menahun") String riwayat_penyakit_menahun,
+            @Field("kekhawatiran") String kekhawatiran,
+            @Field("upaya_pengobatan") String upaya_pengobatan,
             @Field("tanggal") String tanggal,
-            @Field("jam") String jam,
-            @Field("sesi") String sesi
+            @Field("poli") String poli_id
     );
 
-    @GET("reservasi/{tanggal}")
-    Call<ResponseJam> getJam(
+    @POST("screening/tambah/{id_reservasi}")
+    Call<ResponsePostScreening> addScreenig(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
-            @Path("tanggal") String tanggal
+            @Path("id_reservasi") String id_reservasi,
+            @Body ResponseScreening file
+    );
+
+    @GET("poli")
+    Call<ResponsePoli> getPoli(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token
 
     );
 
-    @GET("reservasi/{tanggal}/{id_jam}")
-    Call<ResponseSesi> getSesi(
+    @GET("reservasi/{idPoli}")
+    Call<ResponseTanggal> getTanggal(
             @Header("Accept") String accept,
             @Header("Authorization") String token,
-            @Path("tanggal") String tanggal,
-            @Path("id_jam") String id_jam
+            @Path("idPoli") String idPoli
     );
 
 }

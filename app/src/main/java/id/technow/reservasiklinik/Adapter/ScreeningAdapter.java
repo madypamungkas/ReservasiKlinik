@@ -59,7 +59,9 @@ public class ScreeningAdapter extends RecyclerView.Adapter<ScreeningAdapter.Scre
             }.getType();
             ArrayList<ScreeningModel> screeningModels = gson.fromJson(json2, type2);
 
-            screeningModels.get(position).setJawaban("ya");
+            model.setJawaban("ya");
+            model.setCreated_at("tidak");
+            model.setUpdated_at("tidak");
 
             String questionSt = gson.toJson(screeningModels);
             editorList.putString("screeningModel", questionSt);
@@ -68,12 +70,34 @@ public class ScreeningAdapter extends RecyclerView.Adapter<ScreeningAdapter.Scre
             String responseQuiz = gson.toJson(responseScreening);
             editorList.putString("response", responseQuiz);
 
-            editorList.commit();
+            editorList.apply();
 
         }
         if (holder.rbNo.isChecked()) {
             model.setJawaban("tidak");
+            String json = sharedPrefs.getString("response", "response");
+            Type type = new TypeToken<ResponseScreening>() {
+            }.getType();
+            ResponseScreening responseScreening = gson.fromJson(json, type);
 
+            String json2 = sharedPrefs.getString("question", "question");
+            Type type2 = new TypeToken<ArrayList<ScreeningModel>>() {
+            }.getType();
+            ArrayList<ScreeningModel> screeningModels = gson.fromJson(json2, type2);
+
+
+            model.setJawaban("tidak");
+            model.setCreated_at("tidak");
+            model.setUpdated_at("tidak");;
+
+            String questionSt = gson.toJson(screeningModels);
+            editorList.putString("screeningModel", questionSt);
+
+            responseScreening.setScreening(screeningModels);
+            String responseQuiz = gson.toJson(responseScreening);
+            editorList.putString("response", responseQuiz);
+
+            editorList.apply();
         }
     }
 

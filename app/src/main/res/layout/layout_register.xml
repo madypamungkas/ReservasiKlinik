@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/loginCard"
-    app:cardCornerRadius="@dimen/loginCardRadius"
-    android:elevation="5dp"
     android:layout_gravity="center"
     android:layout_marginTop="@dimen/loginViewsMargin"
     android:layout_marginBottom="@dimen/loginViewsMargin"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    android:elevation="5dp"
+    app:cardCornerRadius="@dimen/loginCardRadius">
 
     <LinearLayout
         style="@style/linearParent"
@@ -17,67 +16,126 @@
 
         <TextView
             style="@style/headerTextPrimary"
-            android:text="@string/register"
+            android:layout_marginTop="@dimen/loginViewsMargin"
             android:fontFamily="@font/maven_pro_regular"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:text="@string/register" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent"
-            android:fontFamily="@font/maven_pro_regular"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
-            <EditText
-                style="@style/modifiedEditText"
-                android:fontFamily="@font/maven_pro_regular"
-                android:inputType="text"
-                android:maxLines="1"
-                android:hint="Nama"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent"
-            android:fontFamily="@font/maven_pro_regular"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
-            <EditText
-                style="@style/modifiedEditText"
-                android:fontFamily="@font/maven_pro_regular"
-                android:inputType="text"
-                android:maxLines="1"
-                android:hint="Username"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
-            <EditText
-                style="@style/modifiedEditText"
-                android:fontFamily="@font/maven_pro_regular"
-                android:inputType="text"
-                android:maxLines="1"
-                android:hint="Nomor Handphone"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent"
-            android:fontFamily="@font/maven_pro_regular"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
-            <EditText
-                style="@style/modifiedEditText"
-                android:fontFamily="@font/maven_pro_regular"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:hint="@string/login_email_hint"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginStart="@dimen/_23sdp"
-            android:background="#4d4f9a94" />
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputNama"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="Masukkan Nama Lengkap"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeColor="@color/gray"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:errorTextColor="@color/black"
+                    app:hintTextColor="@color/gray"
+                    app:startIconDrawable="@drawable/ic_person_black_24dp"
+                    app:startIconTint="@color/colorPrimaryDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@drawable/cursor_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputEmail"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="Masukkan alamat email"
+                    android:textColorHint="@color/gray"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeColor="@color/gray"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:errorTextColor="@color/black"
+                    app:hintTextColor="@color/gray"
+                    app:startIconDrawable="@drawable/ic_mail_black_24dp"
+                    app:startIconTint="@color/colorPrimaryDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@drawable/cursor_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputPassword"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="Masukkan kata sandi"
+                        android:textColorHint="@color/gray"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/gray"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:errorTextColor="@color/black"
+                        app:hintTextColor="@color/gray"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/gray"
+                        app:startIconDrawable="@drawable/ic_lock_24dp"
+                        app:startIconTint="@color/colorPrimaryDark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputPass"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textColor="@color/black"
+                            android:textCursorDrawable="@drawable/cursor_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -102,20 +160,10 @@
                 android:textSize="@dimen/_12ssp" />
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/parent"
-            android:fontFamily="@font/maven_pro_regular"
-            android:layout_marginTop="@dimen/signup_text_margin_top">
-            <EditText
-                style="@style/modifiedEditText"
-                android:fontFamily="@font/maven_pro_regular"
-                android:hint="@string/login_password_hint"
-                android:maxLines="1"
-                android:inputType="textPassword"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             style="@style/loginButton"
+            android:id="@+id/loginButton"
             android:layout_gravity="center"
             android:paddingLeft="@dimen/_25sdp"
             android:paddingRight="@dimen/_25sdp"
@@ -123,12 +171,13 @@
 
         <TextView
             style="@style/parent"
-            android:textAlignment="center"
+            android:layout_marginTop="@dimen/loginViewsMargin"
             android:fontFamily="@font/maven_pro_regular"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
             android:text="@string/signup_login_hint"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:textAlignment="center"
+            android:id="@+id/btnLogin"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

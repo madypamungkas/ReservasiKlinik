@@ -43,7 +43,7 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
     public void onBindViewHolder(@NonNull final ListPasienVH holder, int position) {
         final PasienModel model = dataPasienModels.get(position);
         holder.txtName.setText(model.getNama());
-        holder.txtNomor.setText(model.getNo_bpjs());
+        holder.txtNomor.setText("NIK : "+model.getNik());
         holder.txtInisial.setText(getInitials(model.getNama()));
         holder.id = model.getId();
         holder.rbChoose.setChecked(position == mSelectedItem);

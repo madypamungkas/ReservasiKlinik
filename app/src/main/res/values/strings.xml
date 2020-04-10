@@ -7,7 +7,7 @@
     <string name="nav_profile">Profil</string>
     <string name="nav_notif2">Notif</string>
     <string name="nav_account">Akun</string>
-    <string name="nav_order">Riwayat Konsultasi</string>
+    <string name="nav_order">Riwayat Reservasi</string>
     <string name="font_light">sans-serif-light</string>
     <string name="font_medium">sans-serif-medium</string>
     <string name="font_bold">sans-serif-bold</string>

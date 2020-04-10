@@ -26,13 +26,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import id.technow.reservasiklinik.API.RetrofitClient;
-import id.technow.reservasiklinik.Adapter.JamAdapter;
-import id.technow.reservasiklinik.Adapter.SesiAdapter;
-import id.technow.reservasiklinik.Model.JamModel;
+import id.technow.reservasiklinik.Adapter.PoliAdapter;
+import id.technow.reservasiklinik.Adapter.TanggalAdapter;
+import id.technow.reservasiklinik.Model.PoliModel;
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
-import id.technow.reservasiklinik.Model.ResponseJam;
-import id.technow.reservasiklinik.Model.ResponseSesi;
-import id.technow.reservasiklinik.Model.SesiModel;
+import id.technow.reservasiklinik.Model.ResponsePoli;
+import id.technow.reservasiklinik.Model.ResponsePostReservasi;
+import id.technow.reservasiklinik.Model.ResponseTanggal;
+import id.technow.reservasiklinik.Model.TanggalModel;
 import id.technow.reservasiklinik.Model.UserModel;
 import id.technow.reservasiklinik.Storage.SharedPrefManager;
 import retrofit2.Call;
@@ -40,20 +41,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReservasiActivity extends AppCompatActivity {
-    private TextView txthp, txtnama, txtnik, txtnoBpjs, txtTanggal, txtJam, txtSesi;
+    private TextView txthp, txtnama, txtnik, txtnoBpjs, txtTanggal, txtPoli;
     String txtNamaSt, txthpSt, txtnikSt, txtnoBpjsSt;
-    String id, tanggal, idJam, idSesi;
-    NestedScrollView nestedJam, nestedSesi;
-    MaterialButton btnJam, btnSesi, btnSave;
+    String id, tanggal, idPoli, idTanggal;
+    NestedScrollView nestedPoli, nestedTanggal;
+    MaterialButton btnPoli, btnTanggal, btnSave;
     DatePickerDialog.OnDateSetListener mDateListener;
-    RecyclerView RVJam, RVSesi;
+    RecyclerView RVPoli, RVTanggal;
     ProgressDialog loading;
-    ArrayList<JamModel> jamModel;
-    ArrayList<SesiModel> sesiModel;
-    JamAdapter jamAdapter;
-    SesiAdapter sesiAdapter;
-    TextInputEditText inputKeluhan;
-    TextInputLayout layoutKeluhan;
+    ArrayList<PoliModel> poliModel;
+    ArrayList<TanggalModel> tanggalModel;
+    PoliAdapter poliAdapter;
+    TanggalAdapter tanggalAdapter;
+    TextInputEditText inputKeluhan, inputKhawatir, inputPenyakit;
+    TextInputLayout layoutKeluhan, layoutkhawatir, layoutPenyakit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +66,20 @@ public class ReservasiActivity extends AppCompatActivity {
         txtnik = findViewById(R.id.txtValue3);
         txtnoBpjs = findViewById(R.id.txtValue4);
         txtTanggal = findViewById(R.id.txtTanggal);
-        txtJam = findViewById(R.id.txtJam);
-        txtSesi = findViewById(R.id.txtSesi);
+        txtPoli = findViewById(R.id.txtPoli);
         layoutKeluhan = findViewById(R.id.layoutKeluhan);
         inputKeluhan = findViewById(R.id.inputKeluhan);
-        nestedJam = findViewById(R.id.nestedJam);
-        nestedSesi = findViewById(R.id.nestedSesi);
-        btnSesi = findViewById(R.id.btnSesi);
-        btnJam = findViewById(R.id.btnJam);
+        inputKhawatir = findViewById(R.id.inputKhawatir);
+        inputPenyakit = findViewById(R.id.inputPenyakit);
+        layoutPenyakit = findViewById(R.id.layoutPenyakit);
+        layoutkhawatir = findViewById(R.id.layoutkhawatir);
+        nestedPoli = findViewById(R.id.nestedPoli);
+        nestedTanggal = findViewById(R.id.nestedTanggal);
+        btnTanggal = findViewById(R.id.btnTanggal);
+        btnPoli = findViewById(R.id.btnPoli);
         btnSave = findViewById(R.id.btnSave);
-        RVJam = findViewById(R.id.RVJam);
-        RVSesi = findViewById(R.id.RVSesi);
+        RVPoli = findViewById(R.id.RVPoli);
+        RVTanggal = findViewById(R.id.RVTanggal);
 
         txtNamaSt = getIntent().getStringExtra("namaPasien");
         txtnikSt = getIntent().getStringExtra("nikPasien");
@@ -102,10 +106,12 @@ public class ReservasiActivity extends AppCompatActivity {
         } else {
             txtnoBpjs.setText(txtnoBpjsSt);
         }
+
+        btnPoli.setEnabled(true);
     }
 
 
-    public void pickTanggal(View view) {
+    /*public void pickTanggal(View view) {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -139,42 +145,40 @@ public class ReservasiActivity extends AppCompatActivity {
                 txtTanggal.setText(dayS + "-" + monthS + "-" + year);
                 tanggal = year + "-" + monthS + "-" + dayS;
                 if (tanggal != null) {
-                    btnJam.setEnabled(true);
+                    btnPoli.setEnabled(true);
                 }
             }
         };
+    }*/
+
+    public void pickTanggal(View view) {
+        nestedPoli.setVisibility(View.GONE);
+        nestedTanggal.setVisibility(View.VISIBLE);
+        viewTanggal();
     }
 
-
-    public void pickSesi(View view) {
-        nestedJam.setVisibility(View.GONE);
-        nestedSesi.setVisibility(View.VISIBLE);
-        viewSesi();
-    }
-
-    public void pickJam(View view) {
-        nestedJam.setVisibility(View.VISIBLE);
-        nestedSesi.setVisibility(View.GONE);
-        viewJam();
+    public void pickPoli(View view) {
+        nestedPoli.setVisibility(View.VISIBLE);
+        nestedTanggal.setVisibility(View.GONE);
+        viewPoli();
 
     }
 
-    private void viewSesi() {
+    private void viewTanggal() {
         UserModel user = SharedPrefManager.getInstance(ReservasiActivity.this).getUser();
 
         String token = "Bearer " + user.getToken();
-        Call<ResponseSesi> call = RetrofitClient.getInstance().getApi().getSesi("application/json", token, tanggal, idJam);
-        call.enqueue(new Callback<ResponseSesi>() {
+        Call<ResponseTanggal> call = RetrofitClient.getInstance().getApi().getTanggal("application/json", token, idPoli);
+        call.enqueue(new Callback<ResponseTanggal>() {
             @Override
-            public void onResponse(Call<ResponseSesi> call, final Response<ResponseSesi> response) {
-                ResponseSesi responseJam = response.body();
+            public void onResponse(Call<ResponseTanggal> call, final Response<ResponseTanggal> response) {
                 if (response.isSuccessful()) {
-                    sesiModel = responseJam.getSesi();
+                    tanggalModel = response.body().getResult();
                     StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
-                    sesiAdapter = new SesiAdapter(ReservasiActivity.this, sesiModel);
-                    RVSesi.setLayoutManager(new LinearLayoutManager(ReservasiActivity.this));
-                    RVSesi.setLayoutManager(staggeredGridLayoutManager);
-                    RVSesi.setAdapter(sesiAdapter);
+                    tanggalAdapter = new TanggalAdapter(ReservasiActivity.this, tanggalModel);
+                    RVTanggal.setLayoutManager(new LinearLayoutManager(ReservasiActivity.this));
+                    RVTanggal.setLayoutManager(staggeredGridLayoutManager);
+                    RVTanggal.setAdapter(tanggalAdapter);
                 } else {
                     Log.i("debug", "onResponse : FAILED");
                     Toast.makeText(ReservasiActivity.this, response.code() + " ", Toast.LENGTH_LONG).show();
@@ -183,7 +187,7 @@ public class ReservasiActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseSesi> call, Throwable t) {
+            public void onFailure(Call<ResponseTanggal> call, Throwable t) {
                 Log.i("debug", "onResponse : FAILED");
                 Toast.makeText(ReservasiActivity.this, t.toString() + R.string.something_wrong + t.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -191,22 +195,22 @@ public class ReservasiActivity extends AppCompatActivity {
 
     }
 
-    private void viewJam() {
+    private void viewPoli() {
         UserModel user = SharedPrefManager.getInstance(ReservasiActivity.this).getUser();
 
         String token = "Bearer " + user.getToken();
-        Call<ResponseJam> call = RetrofitClient.getInstance().getApi().getJam("application/json", token, tanggal);
-        call.enqueue(new Callback<ResponseJam>() {
+        Call<ResponsePoli> call = RetrofitClient.getInstance().getApi().getPoli("application/json", token);
+        call.enqueue(new Callback<ResponsePoli>() {
             @Override
-            public void onResponse(Call<ResponseJam> call, final Response<ResponseJam> response) {
-                ResponseJam responseJam = response.body();
+            public void onResponse(Call<ResponsePoli> call, final Response<ResponsePoli> response) {
+                ResponsePoli responsePoli = response.body();
                 if (response.isSuccessful()) {
-                    jamModel = responseJam.getJam();
+                    poliModel = responsePoli.getResult();
                     StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-                    jamAdapter = new JamAdapter(ReservasiActivity.this, jamModel);
-                    RVJam.setLayoutManager(new LinearLayoutManager(ReservasiActivity.this));
-                    RVJam.setLayoutManager(staggeredGridLayoutManager);
-                    RVJam.setAdapter(jamAdapter);
+                    poliAdapter = new PoliAdapter(ReservasiActivity.this, poliModel);
+                    RVPoli.setLayoutManager(new LinearLayoutManager(ReservasiActivity.this));
+                    RVPoli.setLayoutManager(staggeredGridLayoutManager);
+                    RVPoli.setAdapter(poliAdapter);
                 } else {
                     Log.i("debug", "onResponse : FAILED");
                     Toast.makeText(ReservasiActivity.this, response.code() + " ", Toast.LENGTH_LONG).show();
@@ -214,25 +218,25 @@ public class ReservasiActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseJam> call, Throwable t) {
+            public void onFailure(Call<ResponsePoli> call, Throwable t) {
                 Log.i("debug", "onResponse : FAILED");
                 Toast.makeText(ReservasiActivity.this, t.toString() + R.string.something_wrong + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public void jamSetting(String jam, String id) {
-        txtJam.setText(jam);
-        btnSesi.setEnabled(true);
-        idJam = id;
-        nestedSesi.setVisibility(View.GONE);
+    public void PoliSetting(String Poli, String id) {
+        txtPoli.setText(Poli);
+        btnTanggal.setEnabled(true);
+        idPoli = id;
     }
 
-    public void sesiSetting(String sesi, String id) {
-        txtSesi.setText(sesi);
-        btnSesi.setEnabled(true);
-        idSesi = id;
-        nestedSesi.setVisibility(View.GONE);
+    public void TanggalSetting(String Tanggal, String tanggalStore) {
+        txtTanggal.setText(Tanggal);
+        btnTanggal.setEnabled(true);
+        //  idTanggal = id;
+        tanggal = tanggalStore;
+        nestedTanggal.setVisibility(View.GONE);
         btnSave.setEnabled(true);
     }
 
@@ -241,43 +245,69 @@ public class ReservasiActivity extends AppCompatActivity {
         String token = "Bearer " + user.getToken();
 
         loading = ProgressDialog.show(ReservasiActivity.this, null, getString(R.string.please_wait), true, false);
-        String keluhan = inputKeluhan.getText().toString().trim();
+        final String keluhan = inputKeluhan.getText().toString().trim();
+        final String khawatir = inputKhawatir.getText().toString().trim();
+        final String penyakit = inputPenyakit.getText().toString().trim();
 
 
         if (keluhan.isEmpty()) {
             loading.dismiss();
-            layoutKeluhan.setError("No HP Tidak Boleh Kosong");
+            layoutKeluhan.setError("Keluhan Tidak Boleh Kosong");
             inputKeluhan.requestFocus();
             return;
         }
+        if (khawatir.isEmpty()) {
+            loading.dismiss();
+            layoutkhawatir.setError("Kekhawatiran Tidak Boleh Kosong,  Jika Tidak Ada tambahkan tanda -");
+            inputKhawatir.requestFocus();
+            return;
+        }
+        if (penyakit.isEmpty()) {
+            loading.dismiss();
+            layoutPenyakit.setError("Riwayat Tidak Boleh Kosong, Jika Tidak Ada tambahkan tanda -");
+            inputPenyakit.requestFocus();
+            return;
+        }
 
-        Call<ResponseEditPasien> call = RetrofitClient
+        Call<ResponsePostReservasi> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .addReservasi("application/json", token, id, keluhan, tanggal, idJam, idSesi);
+                .addReservasi("application/json", token, id, keluhan + "", penyakit + "", khawatir + "", "-", tanggal + "", idPoli + "");
 
-        call.enqueue(new Callback<ResponseEditPasien>() {
+        call.enqueue(new Callback<ResponsePostReservasi>() {
             @Override
-            public void onResponse(Call<ResponseEditPasien> call, Response<ResponseEditPasien> response) {
-                ResponseEditPasien responseEditPasien = response.body();
+            public void onResponse(Call<ResponsePostReservasi> call, Response<ResponsePostReservasi> response) {
+                ResponsePostReservasi responseEditPasien = response.body();
                 loading.dismiss();
                 if (response.isSuccessful()) {
                     if (responseEditPasien.getStatus().equals("success")) {
                         Log.i("debug", "onResponse: SUCCESS");
                         loading.dismiss();
-                        Intent intent = new Intent(ReservasiActivity.this, DataPasien.class);
+                        Intent intent = new Intent(ReservasiActivity.this, ScreeningActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("idReservasi", response.body().getReservasi().getId());
                         startActivity(intent);
                     } else {
                         Log.i("debug", "onResponse: FAILED");
                         loading.dismiss();
-                        //   Toast.makeText(TambahPasienActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(ReservasiActivity.this, response.code() + " " + responseEditPasien.getStatus(), Toast.LENGTH_LONG).show();
+
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+
+                            Toast.makeText(ReservasiActivity.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                            //   Toast.makeText(ReservasiActivity.this, id+" - "+ keluhan+" - "+ penyakit +" - "+khawatir+" - "+ "- upaya"+" - "+ tanggal+" - "+ idPoli+"", Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Toast.makeText(ReservasiActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 } else {
                     loading.dismiss();
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
+
                         Toast.makeText(ReservasiActivity.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                        //   Toast.makeText(ReservasiActivity.this, id+" - "+ keluhan+" - "+ penyakit +" - "+khawatir+" - "+ "- upaya"+" - "+ tanggal+" - "+ idPoli+"", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(ReservasiActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -285,7 +315,7 @@ public class ReservasiActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseEditPasien> call, Throwable t) {
+            public void onFailure(Call<ResponsePostReservasi> call, Throwable t) {
                 Log.e("debug", "onFailure: ERROR > " + t.toString());
                 loading.dismiss();
                 Toast.makeText(ReservasiActivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();

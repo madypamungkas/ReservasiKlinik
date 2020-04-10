@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class ResponseJam {
+public class ResponsePoli {
     @SerializedName("status")
     @Expose
     private String status;
@@ -13,18 +13,18 @@ public class ResponseJam {
 
     @SerializedName("result")
     @Expose
-    private ArrayList<JamModel> jam;
+    private ArrayList<PoliModel> result;
 
-    public ResponseJam(String status, ArrayList<JamModel> jam) {
+    public ResponsePoli(String status, ArrayList<PoliModel> result) {
         this.status = status;
-        this.jam = jam;
+        this.result = result;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public ArrayList<JamModel> getJam() {
-        return jam;
+    public ArrayList<PoliModel> getResult() {
+        return result;
     }
 }

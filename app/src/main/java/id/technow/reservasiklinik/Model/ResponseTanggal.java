@@ -5,26 +5,24 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class ResponseSesi {
+public class ResponseTanggal {
     @SerializedName("status")
     @Expose
     private String status;
     @SerializedName("result")
     @Expose
-    private ArrayList<SesiModel> sesi;
+    private ArrayList<TanggalModel> result;
 
-    public ResponseSesi(String status, ArrayList<SesiModel> sesi) {
+    public ResponseTanggal(String status, ArrayList<TanggalModel> result) {
         this.status = status;
-        this.sesi = sesi;
+        this.result = result;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public ArrayList<SesiModel> getSesi() {
-        return sesi;
+    public ArrayList<TanggalModel> getResult() {
+        return result;
     }
-
-
 }

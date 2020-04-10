@@ -14,37 +14,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import id.technow.reservasiklinik.Model.JamModel;
-import id.technow.reservasiklinik.Model.SesiModel;
+import id.technow.reservasiklinik.Model.TanggalModel;
 import id.technow.reservasiklinik.R;
 import id.technow.reservasiklinik.ReservasiActivity;
 
-public class SesiAdapter extends RecyclerView.Adapter<SesiAdapter.SesiVH> {
+public class TanggalAdapter extends RecyclerView.Adapter<TanggalAdapter.SesiVH> {
     Context mCtx;
-    ArrayList<SesiModel> sesiModels;
+    ArrayList<TanggalModel> tanggalModels;
     private int mSelectedItem = -1;
 
-    public SesiAdapter(Context mCtx, ArrayList<SesiModel> sesiModels) {
+    public TanggalAdapter(Context mCtx, ArrayList<TanggalModel> tanggalModels) {
         this.mCtx = mCtx;
-        this.sesiModels = sesiModels;
+        this.tanggalModels = tanggalModels;
     }
 
     @NonNull
     @Override
     public SesiVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_jam_sesi, parent, false);
-        SesiAdapter.SesiVH holder = new SesiAdapter.SesiVH(view);
-        return new SesiAdapter.SesiVH(view);
+        TanggalAdapter.SesiVH holder = new TanggalAdapter.SesiVH(view);
+        return new TanggalAdapter.SesiVH(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SesiVH holder, int position) {
-        SesiModel sesi = sesiModels.get(position);
-        holder.tvSchool.setText(sesi.getSesi());
+        TanggalModel tanggal = tanggalModels.get(position);
+        holder.tvSchool.setText(tanggal.getKeterangan());
         if (position == mSelectedItem) {
             holder.placeA.setCardBackgroundColor(Color.parseColor("#FFB100"));
             if (mCtx instanceof ReservasiActivity) {
-                ((ReservasiActivity) mCtx).sesiSetting(sesi.getSesi(), sesi.getId());
+                ((ReservasiActivity) mCtx).TanggalSetting(tanggal.getKeterangan(), tanggal.getTanggal());
             }
            /* if (mCtx instanceof ChangeProfile) {
                 ((ChangeProfile) mCtx).setTextSch(schools.getText(), schools.getId());
@@ -57,7 +56,7 @@ public class SesiAdapter extends RecyclerView.Adapter<SesiAdapter.SesiVH> {
 
     @Override
     public int getItemCount() {
-        return sesiModels.size();
+        return tanggalModels.size();
     }
 
     class SesiVH extends RecyclerView.ViewHolder {
@@ -76,7 +75,7 @@ public class SesiAdapter extends RecyclerView.Adapter<SesiAdapter.SesiVH> {
              @Override
              public void onClick(View v) {
                  mSelectedItem = getAdapterPosition();
-                 notifyItemRangeChanged(0, sesiModels.size());
+                 notifyItemRangeChanged(0, tanggalModels.size());
                  notifyDataSetChanged();
 
              }

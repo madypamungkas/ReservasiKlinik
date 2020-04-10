@@ -23,9 +23,9 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/carousel"
-        android:layout_below="@+id/txtTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTop"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_8sdp"
         app:cardElevation="@dimen/_3sdp"
@@ -224,18 +224,18 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/menuRV"
-        android:layout_below="@+id/carousel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/carousel"
         android:fillViewport="true">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_60sdp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_8sdp"
             app:cardElevation="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_60sdp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -299,6 +299,85 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_weight="4"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Kekhawatiran"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutkhawatir"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="Kekhawatiran"
+                        android:textColorHint="@color/gray"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/gray"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:errorTextColor="@color/black"
+                        app:hintTextColor="@color/gray">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputKhawatir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:lines="5"
+                            android:minLines="4"
+                            android:textColor="@color/black"
+                            android:textCursorDrawable="@drawable/cursor_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_weight="4"
+                        android:fontFamily="@font/maven_pro_regular"
+                        android:text="Riwayat Penyakit Menahun"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutPenyakit"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="Keluhan"
+                        android:textColorHint="@color/gray"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/gray"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:errorTextColor="@color/black"
+                        app:hintTextColor="@color/gray">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputPenyakit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:lines="5"
+                            android:minLines="4"
+                            android:textColor="@color/black"
+                            android:textCursorDrawable="@drawable/cursor_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -311,7 +390,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/maven_pro_regular"
-                            android:text="Tanggal"
+                            android:text="Poli"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14ssp" />
@@ -324,77 +403,18 @@
 
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnTanggal"
+                                android:id="@+id/btnPoli"
                                 android:layout_width="@dimen/_120sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginBottom="@dimen/_4sdp"
                                 android:background="@color/colorPrimaryDark"
-                                android:fontFamily="@font/roboto_bold"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp"
-                                android:text="Pilih Tanggal"
-                                android:onClick="pickTanggal"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/_10sdp"
-                                app:backgroundTint="@color/white"
-                                app:iconGravity="textStart"
-                                app:iconTint="@color/primaryTextColor"
-                                app:strokeColor="@color/colorPrimaryDark"
-                                app:strokeWidth="@dimen/_1sdp" />
-
-                            <TextView
-                                android:id="@+id/txtTanggal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/maven_pro_regular"
-                                android:paddingTop="@dimen/_8sdp"
-                                android:text="Tanggal"
-                                android:textAlignment="textEnd"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_14ssp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/maven_pro_regular"
-                            android:text="Jam"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14ssp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnJam"
                                 android:enabled="false"
-                                android:layout_width="@dimen/_120sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginBottom="@dimen/_4sdp"
-                                android:background="@color/colorPrimaryDark"
                                 android:fontFamily="@font/roboto_bold"
+                                android:onClick="pickPoli"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
-                                android:text="Pilih Jam"
-                                android:onClick="pickJam"
+                                android:text="Pilih Poli"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="@dimen/_10sdp"
                                 app:backgroundTint="@color/white"
@@ -404,25 +424,26 @@
                                 app:strokeWidth="@dimen/_1sdp" />
 
                             <TextView
-                                android:id="@+id/txtJam"
+                                android:id="@+id/txtPoli"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/maven_pro_regular"
                                 android:paddingTop="@dimen/_8sdp"
-                                android:text="Jam"
+                                android:text="Poli"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14ssp" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <androidx.core.widget.NestedScrollView
-                        android:visibility="gone"
-                        android:id="@+id/nestedJam"
+                        android:id="@+id/nestedPoli"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fillViewport="true">
+                        android:fillViewport="true"
+                        android:visibility="gone">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -430,7 +451,7 @@
                             android:orientation="vertical">
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/RVJam"
+                                android:id="@+id/RVPoli"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -465,7 +486,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/maven_pro_regular"
-                            android:text="Sesi"
+                            android:text="Tanggal"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14ssp" />
@@ -478,18 +499,18 @@
 
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnSesi"
-                                android:enabled="false"
+                                android:id="@+id/btnTanggal"
                                 android:layout_width="@dimen/_120sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginBottom="@dimen/_4sdp"
                                 android:background="@color/colorPrimaryDark"
+                                android:enabled="false"
                                 android:fontFamily="@font/roboto_bold"
+                                android:onClick="pickTanggal"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
-                                android:text="Pilih Sesi"
-                                android:onClick="pickSesi"
+                                android:text="Pilih Tanggal"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="@dimen/_10sdp"
                                 app:backgroundTint="@color/white"
@@ -499,13 +520,13 @@
                                 app:strokeWidth="@dimen/_1sdp" />
 
                             <TextView
-                                android:id="@+id/txtSesi"
+                                android:id="@+id/txtTanggal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/maven_pro_regular"
                                 android:paddingTop="@dimen/_8sdp"
-                                android:text="Sesi"
+                                android:text="Tanggal"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14ssp" />
@@ -513,12 +534,12 @@
                     </LinearLayout>
 
                     <androidx.core.widget.NestedScrollView
-                        android:visibility="gone"
-                        android:id="@+id/nestedSesi"
+                        android:id="@+id/nestedTanggal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fillViewport="true">
+                        android:fillViewport="true"
+                        android:visibility="gone">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -526,7 +547,7 @@
                             android:orientation="vertical">
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/RVSesi"
+                                android:id="@+id/RVTanggal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -564,11 +585,11 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@color/colorPrimary"
+            android:enabled="false"
             android:fontFamily="@font/roboto_bold"
+            android:onClick="saveReservasi"
             android:padding="@dimen/_7sdp"
             android:text="Simpan"
-            android:enabled="false"
-            android:onClick="saveReservasi"
             android:textColor="@color/white"
             android:textSize="@dimen/_12sdp" />
 
