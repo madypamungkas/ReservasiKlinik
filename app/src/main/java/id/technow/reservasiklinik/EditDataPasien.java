@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +33,8 @@ public class EditDataPasien extends AppCompatActivity {
     String id;
     private TextView txthp, txtnama, txtnik, txtnoBpjs;
     String txtNamaSt, txthpSt, txtnikSt, txtnoBpjsSt;
-
+    RadioButton rBYes, rBNo;
+    LinearLayout textInputBPJS;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +52,18 @@ public class EditDataPasien extends AppCompatActivity {
         txtnama = findViewById(R.id.txtValue2);
         txtnik = findViewById(R.id.txtValue3);
         txtnoBpjs = findViewById(R.id.txtValue4);
+        rBYes = findViewById(R.id.rBYes);
+        rBNo = findViewById(R.id.rbNo);
+        textInputBPJS = findViewById(R.id.textInputBPJS);
 
         txtNamaSt  = getIntent().getStringExtra("namaPasien");
         txtnikSt  = getIntent().getStringExtra("nikPasien");
         txthpSt  = getIntent().getStringExtra("hpPasien");
         txtnoBpjsSt  = getIntent().getStringExtra("bpjsPasien");
+        if(txtnoBpjsSt!= null){
+            rBYes.setChecked(true);
+            textInputBPJS.setVisibility(View.VISIBLE);
+        }
 
         if (txtNamaSt == null){
             txtnama.setText("-");
@@ -76,7 +87,26 @@ public class EditDataPasien extends AppCompatActivity {
             txtnoBpjs.setText(txtnoBpjsSt);
             inputBPJS.setText(txtnoBpjsSt);
         }
-
+        rBYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rBYes.isChecked()) {
+                    textInputBPJS.setVisibility(View.VISIBLE);
+                } else {
+                    textInputBPJS.setVisibility(View.GONE);
+                }
+            }
+        });
+        rBNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rBNo.isChecked()) {
+                    textInputBPJS.setVisibility(View.GONE);
+                } else {
+                    textInputBPJS.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 

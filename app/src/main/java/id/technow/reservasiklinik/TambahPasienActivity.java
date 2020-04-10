@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -28,6 +31,8 @@ public class TambahPasienActivity extends AppCompatActivity {
     private TextInputLayout layoutNIK, layoutBpjs, layoutNomorHp, layoutNama;
     private TextInputEditText inputHp, inputNama, inputNIK, inputBPJS;
     ProgressDialog loading;
+    RadioButton rBYes, rBNo;
+    LinearLayout textInputBPJS;
 
 
     @Override
@@ -42,7 +47,30 @@ public class TambahPasienActivity extends AppCompatActivity {
         layoutBpjs = findViewById(R.id.layoutBpjs);
         layoutNomorHp = findViewById(R.id.layoutNomorHp);
         layoutNama = findViewById(R.id.layoutNama);
+        rBYes = findViewById(R.id.rBYes);
+        rBNo = findViewById(R.id.rbNo);
+        textInputBPJS = findViewById(R.id.textInputBPJS);
 
+        rBYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rBYes.isChecked()) {
+                    textInputBPJS.setVisibility(View.VISIBLE);
+                } else {
+                    textInputBPJS.setVisibility(View.GONE);
+                }
+            }
+        });
+        rBNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rBNo.isChecked()) {
+                    textInputBPJS.setVisibility(View.GONE);
+                } else {
+                    textInputBPJS.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     public void simpanPasien(View view) {

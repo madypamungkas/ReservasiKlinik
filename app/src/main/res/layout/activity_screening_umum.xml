@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScreeningActivity">
+    tools:context=".ScreeningUmumActivity">
 
     <TextView
         android:id="@+id/txtTitle"
@@ -118,7 +118,6 @@
                 android:orientation="vertical"
                 android:scrollbarThumbHorizontal="@null"
                 android:scrollbarThumbVertical="@null">
-
             </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.core.widget.NestedScrollView>

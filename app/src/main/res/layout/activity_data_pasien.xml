@@ -15,7 +15,7 @@
         android:layout_weight="4"
         android:fontFamily="@font/maven_pro_bold"
         android:text="Data Pasien"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_14ssp" />
 

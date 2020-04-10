@@ -23,13 +23,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import id.technow.reservasiklinik.API.RetrofitClient;
-import id.technow.reservasiklinik.Adapter.DataPasienAdapter;
 import id.technow.reservasiklinik.Adapter.ScreeningAdapter;
-import id.technow.reservasiklinik.Model.PasienModel;
-import id.technow.reservasiklinik.Model.PostReservasiModel;
 import id.technow.reservasiklinik.Model.PostScreeningModel;
-import id.technow.reservasiklinik.Model.ResponseListPasien;
 import id.technow.reservasiklinik.Model.ResponsePostScreening;
+import id.technow.reservasiklinik.Model.ResponsePostScreeningUmum;
 import id.technow.reservasiklinik.Model.ResponseScreening;
 import id.technow.reservasiklinik.Model.ScreeningModel;
 import id.technow.reservasiklinik.Model.UserModel;
@@ -38,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ScreeningActivity extends AppCompatActivity {
+public class ScreeningUmumActivity extends AppCompatActivity {
     private RecyclerView rvPasien;
     ArrayList<ScreeningModel> model;
     ScreeningAdapter adapter;
@@ -47,9 +44,8 @@ public class ScreeningActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screening);
+        setContentView(R.layout.activity_screening_umum);
         rvPasien = findViewById(R.id.rvPasien);
-        idReservasi = getIntent().getStringExtra("idReservasi");
         loadData();
     }
 
@@ -65,9 +61,9 @@ public class ScreeningActivity extends AppCompatActivity {
                     int size = listPasien.getScreening().size();
                     model = response.body().getScreening();
                     if (model.isEmpty()) {
-                        Toast.makeText(ScreeningActivity.this, "Data Screening Tidak Tersedia", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScreeningUmumActivity.this, "Data Screening Tidak Tersedia", Toast.LENGTH_SHORT).show();
                     } else {
-                        final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningActivity.this);
+                        final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningUmumActivity.this);
                         SharedPreferences.Editor editorList = sharedPrefs.edit();
                         Gson gson = new Gson();
 
@@ -82,14 +78,14 @@ public class ScreeningActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(ScreeningActivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScreeningUmumActivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseScreening> call, Throwable t) {
 
-                Toast.makeText(ScreeningActivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScreeningUmumActivity.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -97,7 +93,7 @@ public class ScreeningActivity extends AppCompatActivity {
     }
 
     public void getLocalData() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningActivity.this);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningUmumActivity.this);
         Gson gson = new Gson();
         String json = sharedPrefs.getString("response", "response");
         Type type = new TypeToken<ResponseScreening>() {
@@ -109,14 +105,14 @@ public class ScreeningActivity extends AppCompatActivity {
         model = screeningModels;
 
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
-        adapter = new ScreeningAdapter(ScreeningActivity.this, model);
-        rvPasien.setLayoutManager(new LinearLayoutManager(ScreeningActivity.this));
+        adapter = new ScreeningAdapter(ScreeningUmumActivity.this, model);
+        rvPasien.setLayoutManager(new LinearLayoutManager(ScreeningUmumActivity.this));
         rvPasien.setLayoutManager(staggeredGridLayoutManager);
         rvPasien.setAdapter(adapter);
     }
 
     public void postDataScreening() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningActivity.this);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningUmumActivity.this);
         Gson gson = new Gson();
         String json = sharedPrefs.getString("response", "response");
         Type type = new TypeToken<ResponseScreening>() {
@@ -141,38 +137,29 @@ public class ScreeningActivity extends AppCompatActivity {
 
         UserModel user = SharedPrefManager.getInstance(this).getUser();
         String token = "Bearer " + user.getToken();
-        Call<ResponsePostScreening> call = RetrofitClient.getInstance().getApi().addScreenig("application/json", token, idReservasi, responseScreening);
-        call.enqueue(new Callback<ResponsePostScreening>() {
+        Call<ResponsePostScreeningUmum> call = RetrofitClient.getInstance().getApi().addScreenigUmum("application/json", token, responseScreening);
+        call.enqueue(new Callback<ResponsePostScreeningUmum>() {
             @Override
-            public void onResponse(Call<ResponsePostScreening> call, Response<ResponsePostScreening> response) {
-                ResponsePostScreening listPasien = response.body();
+            public void onResponse(Call<ResponsePostScreeningUmum> call, Response<ResponsePostScreeningUmum> response) {
+                ResponsePostScreeningUmum listPasien = response.body();
                 if (response.isSuccessful()) {
-                    PostScreeningModel reservasiModel = response.body().getReservasi();
-                    Intent intent = new Intent(ScreeningActivity.this, ReservasiResultActivity.class);
-                    intent.putExtra("idReservasi", reservasiModel.getId());
-                    intent.putExtra("codeReservasi", reservasiModel.getKode());
-                    intent.putExtra("antrian", reservasiModel.getAntrian());
-                    intent.putExtra("counter", reservasiModel.getCounter());
-                    intent.putExtra("status", reservasiModel.getStatus());
-                    intent.putExtra("tanggal", reservasiModel.getTanggal());
-                    intent.putExtra("poli", response.body().getReservasi().getPoli().getPoli());
-                    intent.putExtra("jam", reservasiModel.getJam());
-                    intent.putExtra("namaPasien", reservasiModel.getCalon_pasien().getNama());
+                    Intent intent = new Intent(ScreeningUmumActivity.this, ScreeningResultActivity.class);
                     intent.putExtra("skorScreening", response.body().getScreening().getSkor());
                     intent.putExtra("hasilScreening", response.body().getScreening().getHasil());
                     startActivity(intent);
 
                 } else {
-                    Toast.makeText(ScreeningActivity.this,
+                    Toast.makeText(ScreeningUmumActivity.this,
                             response.message() + " ",
                             Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponsePostScreening> call, Throwable t) {
+            public void onFailure(Call<ResponsePostScreeningUmum> call, Throwable t) {
 
-                Toast.makeText(ScreeningActivity.this,
+                Toast.makeText(ScreeningUmumActivity.this,
+                        //R.string.something_wrong,
                         t.toString() + " ",
                         Toast.LENGTH_SHORT).show();
             }

@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 
 import id.technow.reservasiklinik.EditDataPasien;
+import id.technow.reservasiklinik.ListPasienAcitivity;
 import id.technow.reservasiklinik.Model.PasienModel;
 import id.technow.reservasiklinik.R;
 import id.technow.reservasiklinik.ReservasiActivity;
@@ -54,25 +56,48 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
             }
         });
         if (position == mSelectedItem) {
-            Intent intent = new Intent(mCtx, ReservasiActivity.class);
-            intent.putExtra("idPasien", model.getId().toString());
-            intent.putExtra("namaPasien", model.getNama());
-            intent.putExtra("nikPasien", model.getNik());
-            intent.putExtra("bpjsPasien", model.getNo_bpjs());
-            intent.putExtra("hpPasien", model.getNo_telepon());
-            mCtx.startActivity(intent);
+            if(model.getNik()!=null){
+                Intent intent = new Intent(mCtx, ReservasiActivity.class);
+                intent.putExtra("idPasien", model.getId().toString());
+                intent.putExtra("namaPasien", model.getNama());
+                intent.putExtra("nikPasien", model.getNik());
+                intent.putExtra("bpjsPasien", model.getNo_bpjs());
+                intent.putExtra("hpPasien", model.getNo_telepon());
+                mCtx.startActivity(intent);
+            }else {
+                Toast.makeText(mCtx, "Lengkapi Data Diri Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mCtx, EditDataPasien.class);
+                intent.putExtra("idPasien", model.getId().toString());
+                intent.putExtra("namaPasien", model.getNama());
+                intent.putExtra("nikPasien", model.getNik());
+                intent.putExtra("bpjsPasien", model.getNo_bpjs());
+                intent.putExtra("hpPasien", model.getNo_telepon());
+                mCtx.startActivity(intent);
+            }
             // holder.layoutMore.setVisibility(View.VISIBLE);
         } else {
             //holder.layoutMore.setVisibility(View.GONE);
         }
         if (holder.rbChoose.isChecked()) {
-            Intent intent = new Intent(mCtx, ReservasiActivity.class);
-            intent.putExtra("idPasien", model.getId().toString());
-            intent.putExtra("namaPasien", model.getNama());
-            intent.putExtra("nikPasien", model.getNik());
-            intent.putExtra("bpjsPasien", model.getNo_bpjs());
-            intent.putExtra("hpPasien", model.getNo_telepon());
-            mCtx.startActivity(intent);
+            if(model.getNik()!=null){
+                Intent intent = new Intent(mCtx, ReservasiActivity.class);
+                intent.putExtra("idPasien", model.getId().toString());
+                intent.putExtra("namaPasien", model.getNama());
+                intent.putExtra("nikPasien", model.getNik());
+                intent.putExtra("bpjsPasien", model.getNo_bpjs());
+                intent.putExtra("hpPasien", model.getNo_telepon());
+                mCtx.startActivity(intent);
+            }else {
+                Toast.makeText(mCtx, "Lengkapi Data Diri Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mCtx, EditDataPasien.class);
+                intent.putExtra("idPasien", model.getId().toString());
+                intent.putExtra("namaPasien", model.getNama());
+                intent.putExtra("nikPasien", model.getNik());
+                intent.putExtra("bpjsPasien", model.getNo_bpjs());
+                intent.putExtra("hpPasien", model.getNo_telepon());
+                mCtx.startActivity(intent);
+            }
+
             //holder.layoutMore.setVisibility(View.VISIBLE);
         }
          /*

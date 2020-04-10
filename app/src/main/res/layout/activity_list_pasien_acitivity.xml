@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListPasienAcitivity">
+
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
@@ -20,9 +21,9 @@
         android:textSize="@dimen/_14ssp" />
 
     <RelativeLayout
-        android:layout_below="@+id/txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtTitle">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutSearcn"
@@ -40,8 +41,7 @@
             app:boxStrokeErrorColor="@color/red"
             app:boxStrokeWidth="@dimen/_1sdp"
             app:errorTextColor="@color/black"
-            app:hintTextColor="@color/gray"
-            >
+            app:hintTextColor="@color/gray">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputSearch"
@@ -54,46 +54,39 @@
                 android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.core.widget.NestedScrollView
-            android:layout_below="@id/layoutSearcn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/layoutSearcn"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:fillViewport="true">
 
-            <RelativeLayout
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/rvPasien"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:scrollbarThumbHorizontal="@null"
+                android:scrollbarThumbVertical="@null">
 
-                <androidx.recyclerview.widget.RecyclerView
-
-                    android:id="@+id/rvPasien"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:nestedScrollingEnabled="false"
-                    android:orientation="vertical"
-                    android:scrollbarThumbHorizontal="@null"
-                    android:scrollbarThumbVertical="@null">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-
-            </RelativeLayout>
+            </androidx.recyclerview.widget.RecyclerView>
         </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_20sdp"
+            android:layout_above="@id/layoutSelesai"
             android:background="@color/white"
             android:gravity="center_vertical|end"
-            android:visibility="gone"
-            android:layout_above="@id/layoutSelesai"
-            >
+            android:paddingTop="@dimen/_20sdp"
+            android:visibility="gone">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
@@ -106,16 +99,17 @@
                 app:backgroundTint="@color/colorPrimaryDark"
                 app:tint="@color/white" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/layoutSelesai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_10sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:gravity="center_vertical|end"
-            android:layout_alignParentEnd="true"
-            android:visibility="visible"
-            android:layout_alignParentBottom="true">
+            android:paddingTop="@dimen/_10sdp"
+            android:visibility="visible">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddNew"
@@ -123,13 +117,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:padding="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@color/colorPrimary"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Tambah Pasien"
                 android:onClick="tambahAnggota"
+                android:padding="@dimen/_7sdp"
+                android:text="Tambah Pasien"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>

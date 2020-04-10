@@ -6,6 +6,8 @@ import id.technow.reservasiklinik.Model.ResponseListPasien;
 import id.technow.reservasiklinik.Model.ResponseLogin;
 import id.technow.reservasiklinik.Model.ResponsePostReservasi;
 import id.technow.reservasiklinik.Model.ResponsePostScreening;
+import id.technow.reservasiklinik.Model.ResponsePostScreeningUmum;
+import id.technow.reservasiklinik.Model.ResponseReservasiList;
 import id.technow.reservasiklinik.Model.ResponseScreening;
 import id.technow.reservasiklinik.Model.ResponseTanggal;
 import retrofit2.Call;
@@ -31,7 +33,9 @@ public interface Api {
     Call<ResponseLogin> registerUser(
             @Field("nama") String nama,
             @Field("email") String email,
-            @Field("password") String password);
+            @Field("password") String password,
+            @Field("nomor_bpjs_atau_kartu_sehat") String nomor_bpjs_atau_kartu_sehat
+    );
 
     @GET("list-pasien")
     Call<ResponseListPasien> pasien(
@@ -90,11 +94,30 @@ public interface Api {
             @Body ResponseScreening file
     );
 
+    @POST("screening-umum")
+    Call<ResponsePostScreeningUmum> addScreenigUmum(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Body ResponseScreening file
+    );
+
     @GET("poli")
     Call<ResponsePoli> getPoli(
             @Header("Accept") String accept,
             @Header("Authorization") String token
+    );
 
+    @GET("reservasi-list")
+    Call<ResponseReservasiList> getReservasi(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token
+    );
+
+    @GET("reservasi-detail/{id_reservasi}")
+    Call<ResponsePostScreening> getReservasiDetail(
+            @Header("Accept") String accept,
+            @Header("Authorization") String token,
+            @Path("id_reservasi") String idReservasi
     );
 
     @GET("reservasi/{idPoli}")

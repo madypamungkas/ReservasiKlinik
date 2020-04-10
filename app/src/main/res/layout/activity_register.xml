@@ -11,7 +11,6 @@
 
         <RelativeLayout style="@style/parent">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -37,9 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_40sdp"
-                android:layout_marginRight="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_20sdp"
                 android:orientation="vertical">
 
 
@@ -47,7 +46,7 @@
                     style="@style/headerText"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
-                    android:layout_marginTop="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:text="Nama Klinik" />
 
                 <include layout="@layout/layout_register" />

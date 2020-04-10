@@ -26,6 +26,7 @@ import java.io.File;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.technow.reservasiklinik.LoginActivity;
 import id.technow.reservasiklinik.R;
+import id.technow.reservasiklinik.Storage.SharedPrefManager;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -76,10 +77,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                         REQUEST_CHOOSE_IMAGE);*/
                 break;
             case R.id.btnLogout:
-              /*  SharedPrefManager.getInstance(getActivity()).clear();
+                SharedPrefManager.getInstance(getActivity()).clear();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);*/
+                startActivity(intent);
                 break;
             case R.id.btnTermCondition:
                 /*Intent toc = new Intent(getActivity(), WebViewActivity.class);

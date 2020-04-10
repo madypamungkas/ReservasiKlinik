@@ -113,12 +113,11 @@
 
         <TextView
             style="@style/viewParent"
-            android:text="Forgot Password?"
+            android:text="Lupa Kata Sandi?"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/newsMoreTextSize"
             android:fontFamily="@font/maven_pro_regular"
             android:layout_gravity="end"
-            android:onClick="viewForgotPAssword"
             android:layout_marginTop="@dimen/_10sdp"/>
 
         <Button

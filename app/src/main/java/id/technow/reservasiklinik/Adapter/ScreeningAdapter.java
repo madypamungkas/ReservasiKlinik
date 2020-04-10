@@ -57,16 +57,15 @@ public class ScreeningAdapter extends RecyclerView.Adapter<ScreeningAdapter.Scre
             String json2 = sharedPrefs.getString("question", "question");
             Type type2 = new TypeToken<ArrayList<ScreeningModel>>() {
             }.getType();
-            ArrayList<ScreeningModel> screeningModels = gson.fromJson(json2, type2);
+            ArrayList<ScreeningModel> screeningModel = gson.fromJson(json2, type2);
 
-            model.setJawaban("ya");
-            model.setCreated_at("tidak");
-            model.setUpdated_at("tidak");
+            screeningModel.get(position).setJawaban("ya");
 
-            String questionSt = gson.toJson(screeningModels);
+
+            String questionSt = gson.toJson(screeningModel);
             editorList.putString("screeningModel", questionSt);
 
-            responseScreening.setScreening(screeningModels);
+            responseScreening.setScreening(screeningModel);
             String responseQuiz = gson.toJson(responseScreening);
             editorList.putString("response", responseQuiz);
 
@@ -83,17 +82,15 @@ public class ScreeningAdapter extends RecyclerView.Adapter<ScreeningAdapter.Scre
             String json2 = sharedPrefs.getString("question", "question");
             Type type2 = new TypeToken<ArrayList<ScreeningModel>>() {
             }.getType();
-            ArrayList<ScreeningModel> screeningModels = gson.fromJson(json2, type2);
+            ArrayList<ScreeningModel> screeningModel = gson.fromJson(json2, type2);
 
 
-            model.setJawaban("tidak");
-            model.setCreated_at("tidak");
-            model.setUpdated_at("tidak");;
+            screeningModel.get(position).setJawaban("tidak");
 
-            String questionSt = gson.toJson(screeningModels);
+            String questionSt = gson.toJson(screeningModel);
             editorList.putString("screeningModel", questionSt);
 
-            responseScreening.setScreening(screeningModels);
+            responseScreening.setScreening(screeningModel);
             String responseQuiz = gson.toJson(responseScreening);
             editorList.putString("response", responseQuiz);
 

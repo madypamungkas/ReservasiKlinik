@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/loginCard"
     android:layout_gravity="center"
-    android:layout_marginTop="@dimen/loginViewsMargin"
     android:layout_marginBottom="@dimen/loginViewsMargin"
     android:background="@color/colorPrimaryDark"
     android:elevation="5dp"
@@ -126,6 +125,100 @@
                             android:textSize="@dimen/_12ssp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+
+
+                        <TextView
+                            android:id="@+id/tvSoal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Kartu sehat / BPJS"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/_13ssp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rBYes"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:text="Ya" />
+
+                                <RadioButton
+                                    android:id="@+id/rbNo"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tidak" />
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvAns"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="0.4"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Answer"
+                            android:textColor="@color/white_smoke"
+                            android:textSize="@dimen/_11ssp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputBPJS"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="Masukkan Kartu Sehat / BPJS"
+                        android:textColorHint="@color/gray"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/gray"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:errorTextColor="@color/black"
+                        app:hintTextColor="@color/gray"
+                        app:startIconDrawable="@drawable/ic_accessibility_black_24dp"
+                        app:startIconTint="@color/colorPrimaryDark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputBPJS"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textCursorDrawable="@drawable/cursor_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

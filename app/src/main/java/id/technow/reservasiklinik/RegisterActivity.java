@@ -10,6 +10,8 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
     Button loginButton;
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
-    private TextInputLayout textInputNama;
-    TextInputEditText inputEmail, inputPass, inputNama;
+    private TextInputLayout textInputNama, textInputBPJS;
+    TextInputEditText inputEmail, inputPass, inputNama, inputBPJS;
     ProgressDialog loading;
+    RadioButton rBYes, rBNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,34 @@ public class RegisterActivity extends AppCompatActivity {
         textInputPassword = findViewById(R.id.textInputPassword);
         textInputNama = findViewById(R.id.textInputNama);
         inputEmail = findViewById(R.id.inputEmail);
+        textInputBPJS = findViewById(R.id.textInputBPJS);
+        inputBPJS = findViewById(R.id.inputBPJS);
         inputPass = findViewById(R.id.inputPass);
         inputNama = findViewById(R.id.inputNama);
+        rBYes = findViewById(R.id.rBYes);
+        rBNo = findViewById(R.id.rbNo);
+
+        rBYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rBYes.isChecked()) {
+                    textInputBPJS.setVisibility(View.VISIBLE);
+                } else {
+                    textInputBPJS.setVisibility(View.GONE);
+                }
+            }
+        });
+        rBNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rBNo.isChecked()) {
+                    textInputBPJS.setVisibility(View.GONE);
+                } else {
+                    textInputBPJS.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                 registerUser();
             }
         });
+
     }
 
     public void registerUser() {
@@ -68,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = inputEmail.getText().toString().trim();
         String password = inputPass.getText().toString().trim();
         String nama = inputNama.getText().toString().trim();
+        String bpjs = inputBPJS.getText().toString().trim();
 
         if (nama.isEmpty()) {
             loading.dismiss();
@@ -106,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         Call<ResponseLogin> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .registerUser(nama, email, password);
+                .registerUser(nama, email, password, bpjs);
 
         call.enqueue(new Callback<ResponseLogin>() {
             @Override
@@ -117,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (responseLogin.getStatus().equals("success")) {
                         Log.i("debug", "onResponse: SUCCESS");
                         loading.dismiss();
+                        Toast.makeText(RegisterActivity.this, "Regiter Berhasil", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                     } else {
