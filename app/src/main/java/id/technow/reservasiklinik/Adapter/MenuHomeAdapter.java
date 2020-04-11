@@ -22,6 +22,7 @@ import id.technow.reservasiklinik.R;
 import id.technow.reservasiklinik.ReservasiActivity;
 import id.technow.reservasiklinik.ScreeningActivity;
 import id.technow.reservasiklinik.ScreeningUmumActivity;
+import id.technow.reservasiklinik.ScreeningView;
 
 public class MenuHomeAdapter extends RecyclerView.Adapter<MenuHomeAdapter.ViewHolder> {
     private List<MenuHomeModel> models;
@@ -58,7 +59,7 @@ public class MenuHomeAdapter extends RecyclerView.Adapter<MenuHomeAdapter.ViewHo
                     Intent i = new Intent(mCtx, DataPasien.class);
                     mCtx.startActivity(i);
                 } else if (menu.getId() == 4) {
-                    Intent i = new Intent(mCtx, ScreeningUmumActivity.class);
+                    Intent i = new Intent(mCtx, ScreeningView.class);
                     mCtx.startActivity(i);
                 }
 

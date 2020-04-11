@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailReservasi"></activity>
+        <activity android:name=".ScreeningView"></activity>
+        <activity android:name=".DetailReservasi" />
         <activity android:name=".ScreeningUmumActivity" />
         <activity android:name=".ReservasiResultActivity" />
         <activity android:name=".ScreeningResultActivity" />
