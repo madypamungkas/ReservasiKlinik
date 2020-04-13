@@ -58,10 +58,10 @@ public class MenuHomeAdapter extends RecyclerView.Adapter<MenuHomeAdapter.ViewHo
                 } else if (menu.getId() == 3) {
                     Intent i = new Intent(mCtx, DataPasien.class);
                     mCtx.startActivity(i);
-                } else if (menu.getId() == 4) {
+                } /*else if (menu.getId() == 4) {
                     Intent i = new Intent(mCtx, ScreeningView.class);
                     mCtx.startActivity(i);
-                }
+                }*/
 
             }
         });

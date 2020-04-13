@@ -15,20 +15,56 @@
         android:orientation="vertical"
         android:visibility="visible">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:gravity="center_horizontal"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4">
+
+                <ImageView
+                    android:layout_gravity="bottom"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:src="@drawable/medical2" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/gameName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="0.6"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Screening Covid-19"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.55">
+            android:layout_weight="0.52">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/soalCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="@dimen/_2sdp"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="@dimen/_14sdp">
 
                 <RelativeLayout
@@ -46,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:fontFamily="@font/roboto_light"
                             android:text="Pertanyaan"
                             android:textAlignment="center"
@@ -82,30 +118,6 @@
                                 android:textSize="@dimen/_15ssp" />
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/gameName"
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text=" Screening Covid-19"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_13ssp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/gameName"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="00"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_18ssp"
-                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/txtScore"
@@ -123,7 +135,6 @@
 
                         <TextView
                             android:id="@+id/timer"
-                            android:visibility="invisible"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txtScore"
@@ -133,7 +144,8 @@
                             android:text="0"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_16ssp" />
+                            android:textSize="@dimen/_16ssp"
+                            android:visibility="invisible" />
 
                     </RelativeLayout>
 
@@ -141,8 +153,7 @@
                         android:id="@+id/imgLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/layoutTop"
-                        android:layout_marginTop="@dimen/_5sdp">
+                        android:layout_below="@+id/layoutTop">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -170,9 +181,11 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/imageGarnish"
                             android:layout_centerVertical="true"
-                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:gravity="center"
                             android:orientation="horizontal"
                             android:weightSum="5">
@@ -223,6 +236,21 @@
                                 android:visibility="visible" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/imageGarnish"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.35"
+                                android:src="@drawable/medical1" />
+                        </LinearLayout>
+
 
                     </RelativeLayout>
 
@@ -234,7 +262,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.30"
+            android:layout_weight="0.25"
             android:background="@color/white_smoke"
             android:orientation="vertical"
             android:scrollbarThumbHorizontal="@null"
@@ -246,7 +274,8 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="@dimen/_2sdp"
+                app:cardBackgroundColor="@color/white_smoke"
                 app:cardCornerRadius="@dimen/_14sdp">
 
                 <androidx.core.widget.NestedScrollView
@@ -273,7 +302,8 @@
                             android:text=" Jawaban Anda"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_13ssp" />
+                            android:textSize="@dimen/_13ssp"
+                            android:visibility="gone" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnYa"
@@ -291,7 +321,9 @@
                             android:textSize="@dimen/_10sdp"
                             app:backgroundTint="@color/white"
                             app:iconGravity="textStart"
-                            app:iconTint="@color/primaryTextColor" />
+                            app:iconTint="@color/primaryTextColor"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="@dimen/_1sdp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnTidak"
@@ -309,7 +341,9 @@
                             android:textSize="@dimen/_10sdp"
                             app:backgroundTint="@color/white"
                             app:iconGravity="textStart"
-                            app:iconTint="@color/dark_red" />
+                            app:iconTint="@color/dark_red"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="@dimen/_1sdp" />
                     </LinearLayout>
 
                 </androidx.core.widget.NestedScrollView>
@@ -321,27 +355,29 @@
             android:id="@+id/layoutSelesai"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.15"
+            android:layout_weight="0.1"
             android:background="@color/white_smoke"
-            android:gravity="center_vertical|end"
+            android:gravity="center_vertical"
             android:paddingTop="@dimen/_10sdp"
             android:visibility="visible">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddNew"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:background="@color/colorPrimaryDark"
                 android:fontFamily="@font/roboto_bold"
+                android:gravity="center_horizontal"
                 android:onClick="postData"
-                android:padding="@dimen/_7sdp"
+                android:paddingStart="@dimen/_45sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_45sdp"
+                android:paddingBottom="@dimen/_7sdp"
                 android:text="Simpan Screening"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                app:backgroundTint="@color/colorPrimaryDark" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -405,7 +441,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="Quiz"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_18ssp" />
 
             <TextView

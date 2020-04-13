@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EF9700</color>
-    <color name="colorPrimaryDark">#FFB100</color>
-    <color name="colorAccent">#242E37</color>
+    <color name="colorPrimary">#002868</color>
+    <color name="colorPrimaryDark">#002649</color>
+    <color name="colorAccent">#FFB100</color>
+    <color name="colorAccentLight">#F7E859</color>
 
 
     <!--colors for modern ui-->

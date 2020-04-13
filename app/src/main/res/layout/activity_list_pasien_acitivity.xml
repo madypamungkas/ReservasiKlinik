@@ -6,19 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".ListPasienAcitivity">
 
-    <TextView
+    <LinearLayout
         android:id="@+id/txtTitle"
+        android:layout_margin="@dimen/_15sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:layout_weight="4"
-        android:fontFamily="@font/maven_pro_bold"
-        android:text="Pilih Data Pasien"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/_14ssp" />
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_gravity="end"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="start"
+                android:src="@drawable/pasien1" />
+
+            <ImageView
+                android:id="@+id/imgProfile2"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/pasien3" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/maven_pro_bold"
+            android:text="Pilih Data Pasien"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

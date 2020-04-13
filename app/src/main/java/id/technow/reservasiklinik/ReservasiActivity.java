@@ -206,7 +206,7 @@ public class ReservasiActivity extends AppCompatActivity {
                 ResponsePoli responsePoli = response.body();
                 if (response.isSuccessful()) {
                     poliModel = responsePoli.getResult();
-                    StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+                    StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
                     poliAdapter = new PoliAdapter(ReservasiActivity.this, poliModel);
                     RVPoli.setLayoutManager(new LinearLayoutManager(ReservasiActivity.this));
                     RVPoli.setLayoutManager(staggeredGridLayoutManager);

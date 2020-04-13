@@ -1,6 +1,7 @@
 package id.technow.reservasiklinik.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,9 +14,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -32,6 +36,7 @@ import id.technow.reservasiklinik.Model.ResponseCorona;
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
 import id.technow.reservasiklinik.Model.UserModel;
 import id.technow.reservasiklinik.R;
+import id.technow.reservasiklinik.ScreeningView;
 import id.technow.reservasiklinik.Storage.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,9 +49,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ArrayList<MenuHomeModel> models;
     // ArrayList<NearPsikologModel> nearModels;
     RecyclerView menuRV, nearPsikologRV;
-    CircleImageView imgProfile;
+    ImageView imgProfile;
     TextView tvName, tvPhone;
     SliderView slider;
+    TextView layoutCard;
     /* HomeSliderViewAdapter sliderAdapter;
      ArrayList<BannerModel> bannerModel = null;*/
     Context mCtx;
@@ -70,19 +76,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tvPhone = fragmentView.findViewById(R.id.tvPhone);
         slider = fragmentView.findViewById(R.id.banner_slider);
         nearPsikologRV = fragmentView.findViewById(R.id.nearPsikologRV);
-
+        layoutCard = fragmentView.findViewById(R.id.layoutCard);
         txtKasus = fragmentView.findViewById(R.id.txtValue1A);
         txtSembuh = fragmentView.findViewById(R.id.txtValue2);
         txtMeninggal = fragmentView.findViewById(R.id.txtValue3);
 
         UserModel userModel = SharedPrefManager.getInstance(getActivity()).getUser();
-        tvName.setText(userModel.getName());
+        tvName.setText("Hello, " + userModel.getName());
 
         models = new ArrayList<>();
         models.add(new MenuHomeModel(1, R.drawable.btn_daftar_konsultasi, "Reservasi Klinik"));
         models.add(new MenuHomeModel(2, R.drawable.btn_jadwal, "Jadwal Pemerikasaan"));
         models.add(new MenuHomeModel(3, R.drawable.btn_biodata, "List Pasien"));
-        models.add(new MenuHomeModel(4, R.drawable.btn_layanan, "Screening\n Covid-19"));
 
         menuRV = fragmentView.findViewById(R.id.RVmain);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
@@ -94,6 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // loadNearPsikolog();
        /* loadBanner();
         loadDetails();*/
+        layoutCard.setOnClickListener(this);
         getCorona();
         return fragmentView;
     }
@@ -161,11 +167,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            /*case R.id.btnSignUp:
-                Intent i = new Intent(getActivity(), RegisterActivity.class);
+            case R.id.layoutCard:
+                Intent i = new Intent(getActivity(), ScreeningView.class);
                 startActivity(i);
-                break;*/
-
+                break;
+            case R.id.imgProfile:
+                Intent image = new Intent(getActivity(), ScreeningView.class);
+                startActivity(image);
+                break;
         }
     }
 
