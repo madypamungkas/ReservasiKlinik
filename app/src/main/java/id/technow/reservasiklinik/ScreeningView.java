@@ -67,6 +67,7 @@ public class ScreeningView extends AppCompatActivity {
     TextInputEditText inputAnswer;
     String namaQuiz, codeQuiz;
     MaterialButton btnYa, btnTidak;
+    ProgressDialog loading;
 
     ArrayList<ScreeningModel> model;
 
@@ -120,12 +121,15 @@ public class ScreeningView extends AppCompatActivity {
     }
 
     private void loadData() {
+        loading = ProgressDialog.show(ScreeningView.this, null, getString(R.string.please_wait), true, false);
+
         UserModel user = SharedPrefManager.getInstance(this).getUser();
         String token = "Bearer " + user.getToken();
         Call<ResponseScreening> call = RetrofitClient.getInstance().getApi().screening("application/json", token);
         call.enqueue(new Callback<ResponseScreening>() {
             @Override
             public void onResponse(Call<ResponseScreening> call, Response<ResponseScreening> response) {
+                loading.dismiss();
                 ResponseScreening listPasien = response.body();
                 if (response.isSuccessful()) {
                     int size = listPasien.getScreening().size();
@@ -157,9 +161,8 @@ public class ScreeningView extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseScreening> call, Throwable t) {
-
+                loading.dismiss();
                 Toast.makeText(ScreeningView.this, R.string.something_wrong, Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -418,6 +421,8 @@ public class ScreeningView extends AppCompatActivity {
     }
 
     public void postDataScreening() {
+        loading = ProgressDialog.show(ScreeningView.this, null, getString(R.string.please_wait), true, false);
+
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(ScreeningView.this);
         Gson gson = new Gson();
         String json = sharedPrefs.getString("response", "response");
@@ -448,6 +453,7 @@ public class ScreeningView extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponsePostScreeningUmum> call, Response<ResponsePostScreeningUmum> response) {
                 ResponsePostScreeningUmum listPasien = response.body();
+                loading.dismiss();
                 if (response.isSuccessful()) {
                     Intent intent = new Intent(ScreeningView.this, ScreeningResultActivity.class);
                     intent.putExtra("skorScreening", response.body().getScreening().getSkor());
@@ -463,7 +469,7 @@ public class ScreeningView extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponsePostScreeningUmum> call, Throwable t) {
-
+                loading.dismiss();
                 Toast.makeText(ScreeningView.this,
                         //R.string.something_wrong,
                         t.toString() + " ",

@@ -1,174 +1,542 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScreeningActivity">
-
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:layout_weight="4"
-        android:fontFamily="@font/maven_pro_bold"
-        android:text="Screening Covid-19"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/_14ssp" />
+    android:orientation="vertical"
+    tools:context=".ScreeningView">
 
     <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTitle"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/tvNum"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:fontFamily="@font/roboto_medium"
-            android:text="No"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp" />
-
-        <TextView
-            android:id="@+id/tvSoal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Pertanyaan"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp" />
-
-        <TextView
-            android:id="@+id/tvAns"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Jawaban"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp" />
-    </LinearLayout>
-
-    <RelativeLayout
+        android:id="@+id/soalLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutSearcn"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:hint="Cari Nama"
-            android:textColorHint="@color/gray"
-            android:visibility="gone"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeColor="@color/gray"
-            app:boxStrokeErrorColor="@color/red"
-            app:boxStrokeWidth="@dimen/_1sdp"
-            app:errorTextColor="@color/black"
-            app:hintTextColor="@color/gray">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:textColor="@color/black"
-
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="@dimen/_12ssp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layoutSearcn"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:fillViewport="true">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-
-                android:id="@+id/rvPasien"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:nestedScrollingEnabled="false"
-                android:orientation="vertical"
-                android:scrollbarThumbHorizontal="@null"
-                android:scrollbarThumbVertical="@null">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </androidx.core.widget.NestedScrollView>
+        android:background="@color/white_smoke"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/layoutSelesai"
-            android:background="@color/white"
-            android:gravity="center_vertical|end"
-            android:paddingTop="@dimen/_20sdp"
-            android:visibility="gone">
+            android:layout_weight="0.13"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:gravity="center_horizontal"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4">
+
+                <ImageView
+                    android:layout_gravity="bottom"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:src="@drawable/medical2" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/gameName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:src="@drawable/ic_add_black_24dp"
-                app:backgroundTint="@color/colorPrimaryDark"
-                app:tint="@color/white" />
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="0.6"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Screening Covid-19"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.52">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/soalCV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="@dimen/_14sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Pertanyaan"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtQuestion"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_15ssp" />
+
+                            <TextView
+                                android:id="@+id/sum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="/40"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_15ssp" />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/txtScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Waktu"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp"
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/timer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtScore"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_16ssp"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/imgLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutTop">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="@dimen/_10sdp">
+
+                        </ImageView>
+
+
+                    </RelativeLayout>
+
+                    <androidx.core.widget.ContentLoadingProgressBar
+                        android:id="@+id/loading"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerInParent="true" />
+
+                    <RelativeLayout
+                        android:id="@+id/textLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/imgLayout"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/imageGarnish"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="5">
+
+                            <ImageView
+                                android:id="@+id/prevSoal"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_weight="0.5"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:src="@drawable/ic_keyboard_arrow_left_white_24dp"
+                                android:tint="@color/white"
+                                android:visibility="visible" />
+
+                            <ScrollView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/soal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/roboto_regular"
+                                        android:text="Soal"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_17ssp" />
+
+
+                                </LinearLayout>
+                            </ScrollView>
+
+                            <ImageView
+                                android:id="@+id/nextSoal"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_weight="0.5"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:src="@drawable/ic_next"
+                                android:tint="@color/white"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/imageGarnish"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.35"
+                                android:src="@drawable/medical1" />
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@color/white_smoke"
+            android:orientation="vertical"
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbarThumbVertical="@null">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                app:cardBackgroundColor="@color/white_smoke"
+                app:cardCornerRadius="@dimen/_14sdp">
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/scrollOption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text=" Jawaban Anda"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_13ssp"
+                            android:visibility="gone" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnYa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:background="@color/primaryTextColor"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="@dimen/_15sdp"
+                            android:text="Ya"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="@dimen/_10sdp"
+                            app:backgroundTint="@color/white"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/primaryTextColor"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="@dimen/_1sdp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTidak"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:background="@color/primaryTextColor"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="@dimen/_15sdp"
+                            android:text="Tidak"
+                            android:textColor="@color/dark_red"
+                            android:textSize="@dimen/_10sdp"
+                            app:backgroundTint="@color/white"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/dark_red"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="@dimen/_1sdp" />
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/layoutSelesai"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            android:gravity="center_vertical|end"
-            android:paddingTop="@dimen/_10sdp">
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:background="@color/white_smoke"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/_10sdp"
+            android:visibility="visible">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddNew"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@color/colorPrimary"
+                android:layout_centerInParent="true"
+                android:background="@color/colorPrimaryDark"
                 android:fontFamily="@font/roboto_bold"
-                android:onClick="tambahScreening"
-                android:padding="@dimen/_7sdp"
-                android:text="Simpan Data"
+                android:gravity="center_horizontal"
+                android:onClick="postData"
+                android:paddingStart="@dimen/_45sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_45sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:text="Simpan Screening"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                app:backgroundTint="@color/colorPrimaryDark" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/readyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/layaoutRemainChance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="end"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtRemainTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:visibility="visible" />
+
         </LinearLayout>
-    </RelativeLayout>
-</RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_160sdp"
+                android:src="@drawable/img_get_ready" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Mulai Screening"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_25ssp" />
+
+            <TextView
+                android:id="@+id/namaSoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Quiz"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_18ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Deskripsi"
+                android:textAlignment="center"
+                android:textColor="@color/light_grey"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Benar"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="+4"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Salah"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="-1"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Tidak Menjawab"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="-1"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/readyBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Mulai"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:backgroundTint="@color/colorAccent" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,11 +1,15 @@
 package id.technow.reservasiklinik.Fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +23,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.card.MaterialCardView;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -31,6 +40,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import id.technow.reservasiklinik.API.RetrofitClient;
 import id.technow.reservasiklinik.API.RetrofitCorona;
 import id.technow.reservasiklinik.Adapter.MenuHomeAdapter;
+import id.technow.reservasiklinik.FetchAddressTask;
+import id.technow.reservasiklinik.MainActivity;
 import id.technow.reservasiklinik.Model.MenuHomeModel;
 import id.technow.reservasiklinik.Model.ResponseCorona;
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
@@ -42,7 +53,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, FetchAddressTask.OnTaskCompleted  {
 
     MenuHomeAdapter adapter;
     //NearPsikologAdapter nearAdapter;
@@ -52,11 +63,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ImageView imgProfile;
     TextView tvName, tvPhone;
     SliderView slider;
-    TextView layoutCard;
+    TextView layoutCard, txtLokasi;
     /* HomeSliderViewAdapter sliderAdapter;
      ArrayList<BannerModel> bannerModel = null;*/
     Context mCtx;
     private TextView txtKasus, txtSembuh, txtMeninggal;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private static final String TRACKING_LOCATION_KEY = "tracking_location";
+    private boolean mTrackingLocation;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationCallback mLocationCallback;
+
 
     public HomeFragment() {
     }
@@ -80,6 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         txtKasus = fragmentView.findViewById(R.id.txtValue1A);
         txtSembuh = fragmentView.findViewById(R.id.txtValue2);
         txtMeninggal = fragmentView.findViewById(R.id.txtValue3);
+        txtLokasi = fragmentView.findViewById(R.id.txtLokasi);
 
         UserModel userModel = SharedPrefManager.getInstance(getActivity()).getUser();
         tvName.setText("Hello, " + userModel.getName());
@@ -99,6 +117,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // loadNearPsikolog();
        /* loadBanner();
         loadDetails();*/
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        if (savedInstanceState != null) {
+            mTrackingLocation = savedInstanceState.getBoolean(TRACKING_LOCATION_KEY);
+        }
+        mLocationCallback = new LocationCallback() {
+            /**
+             * This is the callback that is triggered when the
+             * FusedLocationClient updates your location.
+             * @param locationResult The result containing the device location.
+             */
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (mTrackingLocation) {
+                    new FetchAddressTask(getActivity(), (FetchAddressTask.OnTaskCompleted) getActivity()).execute(locationResult.getLastLocation());
+                }
+            }
+        };
+        startTrackingLocation();
         layoutCard.setOnClickListener(this);
         getCorona();
         return fragmentView;
@@ -144,13 +182,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         slider.setSliderAdapter(sliderAdapter);
     }
 
-    public void loadNearPsikolog() {
-        nearModels = new ArrayList<>();
-        nearModels.add(new NearPsikologModel(1, "Psikolog 1", "Jalan Sekip 1 no 89 UGM", "081234123412", "122230494", "https://gmc.ugm.ac.id/wp-content/uploads/sites/536/2013/10/21-300x166.jpg"));
-        nearModels.add(new NearPsikologModel(1, "Psikolog 2", "Bulaksumur UGM", "081234123412", "122230494", "https://ugm.ac.id/galleries/crop/84--730x420px.jpg"));
-        nearModels.add(new NearPsikologModel(1, "Psikolog 3", "Tegalrejo Jogja", "081234123412", "122230494", "https://ugm.ac.id/galleries/crop/84--730x420px.jpg"));
-        nearModels.add(new NearPsikologModel(1, "Psikolog 4", "GMC UGM", "081234123412", "122230494", "https://gmc.ugm.ac.id/wp-content/uploads/sites/536/2013/10/21-300x166.jpg"));*/
-/*
+  /*
         nearModels.add(new NearPsikologModel(1, "Psikolog 5", "RSA UGM", "081234123412", "122230494", "https://ruko.technow.id/storage/banner/1?2019-10-29%2004:31:05"));
         nearModels.add(new NearPsikologModel(1, "Psikolog 6", "RSUP Dr Sardjito", "081234123412", "122230494", "https://ruko.technow.id/storage/banner/1?2019-10-29%2004:31:05"));*//*
 
@@ -178,35 +210,84 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-   /* public void loadDetails() {
-        final String accept = "application/json";
 
-        final String token = SharedPrefManager.getInstance(getActivity()).getToken().getToken();
-        retrofit2.Call<ResponseDetailKlien> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .getKlien("Bearer "+token, accept);
-        call.enqueue(new retrofit2.Callback<ResponseDetailKlien>() {
-            @Override
-            public void onResponse(retrofit2.Call<ResponseDetailKlien> call, retrofit2.Response<ResponseDetailKlien> response) {
-                if (response.isSuccessful()) {
-                    SharedPrefManager.getInstance(getActivity()).saveDetails(response.body().getDetails());
-                    int idUser = response.body().getDetails().getId();
-                    tvName.setText(response.body().getDetails().getName());
-                    tvPhone.setText(response.body().getDetails().getNo_telepon());
-                    String link = "https://psikologi.ridwan.info/images/";
-                    Picasso.get().load(response.body().getDetails().getFoto()).into(imgProfile);
+    private void startTrackingLocation() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+        } else {
+            mTrackingLocation = true;
+            mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback, null);
+/*            mLocationButton.setText(R.string.stop_tracking_location);
+            mRotateAnim.start();*/
+            txtLokasi.setText(getString(R.string.address_text,
+                    getString(R.string.loading),
+                    System.currentTimeMillis()));
+        }
+    }
 
+    private void stopTrackingLocation() {
+        if (mTrackingLocation) {
+            mTrackingLocation = false;
+         /*   mLocationButton.setText(R.string.start_tracking_location);
+        mLocationTextView.setText(R.string.textview_hint);
+        mRotateAnim.end();*/
+    }
+    }
+
+    private LocationRequest getLocationRequest() {
+        LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        return locationRequest;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(TRACKING_LOCATION_KEY, mTrackingLocation);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_LOCATION_PERMISSION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startTrackingLocation();
                 } else {
-                    Toast.makeText(getActivity(), "Error, Periksa Kembali Jaringan Anda 2" + response.errorBody(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), R.string.location_permission_denied, Toast.LENGTH_SHORT).show();
                 }
-            }
+                break;
+        }
+    }
 
-            @Override
-            public void onFailure(retrofit2.Call<ResponseDetailKlien> call, Throwable t) {
-                Toast.makeText(getActivity(), "Error, Periksa Kembali Jaringan Anda 3" + t.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
+    @Override
+    public void onTaskCompleted(String result) {
+        Toast.makeText(getActivity(), result + " ", Toast.LENGTH_LONG).show();
+
+        if (mTrackingLocation) {
+
+            /*mLocationTextView.setText(getString(R.string.address_text,
+                    result, System.currentTimeMillis()));*/
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mTrackingLocation) {
+            stopTrackingLocation();
+            mTrackingLocation = true;
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (mTrackingLocation) {
+            startTrackingLocation();
+        }
+        super.onResume();
+    }
 }
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "545823599257",
+    "firebase_url": "https://reservasi-app.firebaseio.com",
+    "project_id": "reservasi-app",
+    "storage_bucket": "reservasi-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545823599257:android:f4f8fb46afdd9014b2a608",
+        "android_client_info": {
+          "package_name": "id.technow.reservasiklinik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545823599257-bg736im0qml8jlqjtg8eg6dvso6bq941.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQqtaH_VtF8Ew0OJiQ7NcFoPj70mOGnNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545823599257-bg736im0qml8jlqjtg8eg6dvso6bq941.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

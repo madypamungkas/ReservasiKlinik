@@ -8,7 +8,7 @@
         android:title="@string/nav_home" />
     <item
         android:id="@+id/nav_order"
-        android:icon="@drawable/ic_history_black_24dp"
+        android:icon="@drawable/ic_email_black_24dp"
         android:title="@string/nav_order" />
 <!--    <item
         android:id="@+id/nav_notif"
