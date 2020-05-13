@@ -23,7 +23,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import id.technow.reservasiklinik.API.RetrofitClient;
+import id.technow.reservasiklinik.Model.NotifModel;
 import id.technow.reservasiklinik.Model.ResponseLogin;
 import id.technow.reservasiklinik.Storage.SharedPrefManager;
 import retrofit2.Call;
@@ -39,19 +42,14 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText inputEmail, inputPass;
     ProgressDialog loading;
 
+    ArrayList<NotifModel> models;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-       /* btnLogin = findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                login();
-            }
-        });
-       */
+        clearnotif();
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,41 +211,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-  /*  public void getDetails() {
-        UserModel user = SharedPrefManager.getInstance(this).getUser();
-        if (user.getToken() != null) {
-            String token = "Bearer " + user.getToken();
+  public void clearnotif(){
+      final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+      final Gson gson = new Gson();
+      final SharedPreferences.Editor editorList = sharedPrefs.edit();
+        models = new ArrayList<>();
+        models.add(new NotifModel( "Judul Notif", "Isi Notif"));
+        String arrayAGR = gson.toJson(models);
+        editorList.putString("notif", arrayAGR);
+        editorList.apply();
 
-            retrofit2.Call<ResponseDetails> call = RetrofitClient.getInstance().getApi().detail("application/json", token);
-            call.enqueue(new Callback<ResponseDetails>() {
-                @Override
-                public void onResponse(retrofit2.Call<ResponseDetails> call, Response<ResponseDetails> response) {
-                    if (response.isSuccessful()) {
-                        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                        SharedPreferences.Editor editorList = sharedPrefs.edit();
-                        Gson gson = new Gson();
-
-                        String detailUser = gson.toJson(response.body());
-
-                        editorList.putString("DetailUser", detailUser);
-                        editorList.commit();
-                        SharedPrefManager.getInstance(LoginActivity.this).saveAnswerChance(3);
-
-                        SharedPrefManager.getInstance(LoginActivity.this).saveDetail(response.body().getUser());
-                        Intent intent = new Intent(LoginActivity.this, Main2Activity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, R.string.something_wrong, Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(retrofit2.Call<ResponseDetails> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, R.string.something_wrong, Toast.LENGTH_LONG).show();
-
-                }
-            });
-        }
-    }*/
+  }
 }

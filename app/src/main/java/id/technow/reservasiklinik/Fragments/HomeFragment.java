@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,7 +54,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, FetchAddressTask.OnTaskCompleted  {
+public class HomeFragment extends Fragment implements View.OnClickListener/*, FetchAddressTask.OnTaskCompleted*/ {
 
     MenuHomeAdapter adapter;
     //NearPsikologAdapter nearAdapter;
@@ -64,8 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
     TextView tvName, tvPhone;
     SliderView slider;
     TextView layoutCard, txtLokasi;
-    /* HomeSliderViewAdapter sliderAdapter;
-     ArrayList<BannerModel> bannerModel = null;*/
+    ImageView location;
     Context mCtx;
     private TextView txtKasus, txtSembuh, txtMeninggal;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -98,6 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
         txtSembuh = fragmentView.findViewById(R.id.txtValue2);
         txtMeninggal = fragmentView.findViewById(R.id.txtValue3);
         txtLokasi = fragmentView.findViewById(R.id.txtLokasi);
+        location = fragmentView.findViewById(R.id.location);
 
         UserModel userModel = SharedPrefManager.getInstance(getActivity()).getUser();
         tvName.setText("Hello, " + userModel.getName());
@@ -114,30 +115,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
         menuRV.setLayoutManager(staggeredGridLayoutManager);
         menuRV.setAdapter(adapter);
 
-        // loadNearPsikolog();
-       /* loadBanner();
-        loadDetails();*/
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        /*mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
         if (savedInstanceState != null) {
             mTrackingLocation = savedInstanceState.getBoolean(TRACKING_LOCATION_KEY);
         }
-        mLocationCallback = new LocationCallback() {
-            /**
-             * This is the callback that is triggered when the
-             * FusedLocationClient updates your location.
-             * @param locationResult The result containing the device location.
-             */
+         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 if (mTrackingLocation) {
                     new FetchAddressTask(getActivity(), (FetchAddressTask.OnTaskCompleted) getActivity()).execute(locationResult.getLastLocation());
                 }
             }
-        };
-        startTrackingLocation();
+        };*/
+       // startTrackingLocation();
         layoutCard.setOnClickListener(this);
+        location.setOnClickListener(this);
         getCorona();
         return fragmentView;
     }
@@ -167,34 +160,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
             }
         });
     }
-/*
-
-    public void loadBanner() {
-        bannerModel = new ArrayList<>();
-        bannerModel.add(new BannerModel(1, "banner 1", "5d440cdd72347.jpg", "Banner 2", "1", R.drawable.banner1, "2019-08-02 10:13:49", "2019-08-02 10:13:49"));
-        bannerModel.add(new BannerModel(1, "banner 1", "5d440cdd72347.jpg", "Banner 2", "1", R.drawable.banner2, "2019-08-02 10:13:49", "2019-08-02 10:13:49"));
-        bannerModel.add(new BannerModel(1, "banner 1", "5d440cdd72347.jpg", "Banner 2", "1", R.drawable.banner3, "2019-08-02 10:13:49", "2019-08-02 10:13:49"));
-        sliderAdapter = new HomeSliderViewAdapter(getActivity(), bannerModel);
-        slider.startAutoCycle();
-        slider.setIndicatorAnimation(IndicatorAnimations.WORM);
-        slider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        slider.setScrollTimeInSec(6);
-        slider.setSliderAdapter(sliderAdapter);
-    }
-
-  /*
-        nearModels.add(new NearPsikologModel(1, "Psikolog 5", "RSA UGM", "081234123412", "122230494", "https://ruko.technow.id/storage/banner/1?2019-10-29%2004:31:05"));
-        nearModels.add(new NearPsikologModel(1, "Psikolog 6", "RSUP Dr Sardjito", "081234123412", "122230494", "https://ruko.technow.id/storage/banner/1?2019-10-29%2004:31:05"));*//*
-
-
-        StaggeredGridLayoutManager staggeredGridLayoutManager2 = new StaggeredGridLayoutManager(1, LinearLayoutManager.HORIZONTAL);
-        nearAdapter = new NearPsikologAdapter(nearModels, getActivity());
-        nearPsikologRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-        nearPsikologRV.setLayoutManager(staggeredGridLayoutManager2);
-        nearPsikologRV.setAdapter(nearAdapter);
-
-    }
-*/
 
     @Override
     public void onClick(View view) {
@@ -206,6 +171,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
             case R.id.imgProfile:
                 Intent image = new Intent(getActivity(), ScreeningView.class);
                 startActivity(image);
+                break;
+            case R.id.location:
+                ((MainActivity)getActivity()).loadLocation();
                 break;
         }
     }
@@ -220,9 +188,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
             mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback, null);
 /*            mLocationButton.setText(R.string.stop_tracking_location);
             mRotateAnim.start();*/
-            txtLokasi.setText(getString(R.string.address_text,
-                    getString(R.string.loading),
-                    System.currentTimeMillis()));
+          /*  txtLokasi.setText(getString(R.string.address_text,
+                    getString(R.string.loading)
+                    ));*/
         }
     }
 
@@ -232,7 +200,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
          /*   mLocationButton.setText(R.string.start_tracking_location);
         mLocationTextView.setText(R.string.textview_hint);
         mRotateAnim.end();*/
-    }
+        }
     }
 
     private LocationRequest getLocationRequest() {
@@ -261,15 +229,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
                 break;
         }
     }
+    public void setLocation(String result){
+        txtLokasi.setText(result);
+    }
 
-    @Override
+   /* @Override
     public void onTaskCompleted(String result) {
         Toast.makeText(getActivity(), result + " ", Toast.LENGTH_LONG).show();
-
         if (mTrackingLocation) {
-
-            /*mLocationTextView.setText(getString(R.string.address_text,
-                    result, System.currentTimeMillis()));*/
+            txtLokasi.setText(getString(R.string.address_text,
+                    result));
         }
     }
 
@@ -288,6 +257,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Fetc
             startTrackingLocation();
         }
         super.onResume();
-    }
+    }*/
 }
 

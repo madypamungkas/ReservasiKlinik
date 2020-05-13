@@ -3,14 +3,19 @@ package id.technow.reservasiklinik;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.FontResourcesParserCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -19,21 +24,29 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.List;
+import java.util.Locale;
 
 import id.technow.reservasiklinik.Fragments.HistoryFragment;
 import id.technow.reservasiklinik.Fragments.HomeFragment;
 import id.technow.reservasiklinik.Fragments.UserFragment;
+import id.technow.reservasiklinik.Storage.SharedPrefManager;
 
-public class MainActivity extends AppCompatActivity implements  FetchAddressTask.OnTaskCompleted{
+public class MainActivity extends AppCompatActivity implements FetchAddressTask.OnTaskCompleted {
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
     private HomeFragment homeFragment;
     private HistoryFragment historyFragment;
     private UserFragment userFragment;
     //private NotificationFragment notifFragment;
+
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final String TRACKING_LOCATION_KEY = "tracking_location";
     private boolean mTrackingLocation;
@@ -44,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("TOken ",""+ FirebaseInstanceId.getInstance().getToken());
+        /*Log.d("TOken ",""+ FirebaseInstanceId.getInstance().getToken());*/
+        getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
         setContentView(R.layout.activity_main);
         mMainFrame = (FrameLayout) findViewById(R.id.main_frame);
@@ -52,25 +66,7 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
 
         homeFragment = new HomeFragment();
         historyFragment = new HistoryFragment();
-      //  notifFragment = new NotificationFragment();
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        if (savedInstanceState != null) {
-            mTrackingLocation = savedInstanceState.getBoolean(TRACKING_LOCATION_KEY);
-        }
-        mLocationCallback = new LocationCallback() {
-            /**
-             * This is the callback that is triggered when the
-             * FusedLocationClient updates your location.
-             * @param locationResult The result containing the device location.
-             */
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (mTrackingLocation) {
-                    new FetchAddressTask(MainActivity.this, MainActivity.this).execute(locationResult.getLastLocation());
-                }
-            }
-        };
         userFragment = new UserFragment();
         setFragment(homeFragment);
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -83,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
                     case R.id.nav_order:
                         setFragment(historyFragment);
                         return true;
-                   /* case R.id.nav_notif:
-                        setFragment(notifFragment);
-                        return true;*/
                     case R.id.nav_account:
                         setFragment(userFragment);
                         return true;
@@ -95,6 +88,48 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
             }
         });
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (savedInstanceState != null) {
+            mTrackingLocation = savedInstanceState.getBoolean(TRACKING_LOCATION_KEY);
+        }
+
+        String location = SharedPrefManager.getInstance(this).getLocation();
+       /* if (location ==null){
+            if (!mTrackingLocation) {
+                startTrackingLocation();
+            } else {
+                stopTrackingLocation();
+            }
+        }*/
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (mTrackingLocation) {
+                    new FetchAddressTask(MainActivity.this, MainActivity.this).execute(locationResult.getLastLocation());
+                }
+            }
+        };
+    }
+
+    public void getToken() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("Token", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        String token = task.getResult().getToken();
+
+
+                        Log.d("Token", token);
+                        //  Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void setFragment(Fragment fragment) {
@@ -111,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
             mTrackingLocation = true;
             mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback, null);
 
-           /* mLocationTextView.setText(getString(R.string.address_text,
+        /*    mLocationTextView.setText(getString(R.string.address_text,
                     getString(R.string.loading),
                     System.currentTimeMillis()));
             mLocationButton.setText(R.string.stop_tracking_location);
@@ -122,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
     private void stopTrackingLocation() {
         if (mTrackingLocation) {
             mTrackingLocation = false;
-           /* mLocationButton.setText(R.string.start_tracking_location);
+         /*   mLocationButton.setText(R.string.start_tracking_location);
             mLocationTextView.setText(R.string.textview_hint);
             mRotateAnim.end();*/
         }
@@ -157,10 +192,18 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
 
     @Override
     public void onTaskCompleted(String result) {
+       /* Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = geocoder.getFromLocation(MyLat, MyLong, 1);
+        String cityName = addresses.get(0).getAddressLine(0);
+        String stateName = addresses.get(0).getAddressLine(1);
+        String countryName = addresses.get(0).getAddressLine(2);
+        */
         if (mTrackingLocation) {
-
-           /* mLocationTextView.setText(getString(R.string.address_text,
-                    result, System.currentTimeMillis()));*/
+            Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+            mTrackingLocation = true;
+            stopTrackingLocation();
+            SharedPrefManager.getInstance(this).saveLocation(result);
+            homeFragment.setLocation(result);
         }
     }
 
@@ -181,4 +224,15 @@ public class MainActivity extends AppCompatActivity implements  FetchAddressTask
         super.onResume();
     }
 
+    public void loadLocation(){
+      /*  HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentById(R.id.);
+        fragment.<specific_function_name>();*/
+        if (!mTrackingLocation) {
+            startTrackingLocation();
+        } else {
+            stopTrackingLocation();
+        }
+       // Toast.makeText(MainActivity.this, "result", Toast.LENGTH_SHORT).show();
+
+    }
 }

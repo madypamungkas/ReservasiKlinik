@@ -23,7 +23,7 @@ public class SharedPrefManager {
         return mInstance;
     }
 
-    public void saveUser(UserModel user){
+    public void saveUser(UserModel user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("id", user.getId());
@@ -37,9 +37,23 @@ public class SharedPrefManager {
         editor.commit();
         editor.apply();
     }
-    public boolean isLoggedIn(){
+    public void saveLocation(String location ){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("locGMS", location);
+        editor.commit();
+        editor.apply();
+    }
+
+    public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString("id", null) != null;
+    }
+
+    public String getLocation() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("locGMS", null);
+
     }
 
     public UserModel getUser() {
@@ -55,6 +69,7 @@ public class SharedPrefManager {
                 sharedPreferences.getString("token", null)
         );
     }
+
     public void clear() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

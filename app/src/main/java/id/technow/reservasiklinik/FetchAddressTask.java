@@ -1,4 +1,5 @@
 package id.technow.reservasiklinik;
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,8 +15,8 @@ import java.util.Locale;
 
 public class FetchAddressTask extends AsyncTask<Location, Void, String> {
 
-private Context mContext;
-private OnTaskCompleted mListener;
+    private Context mContext;
+    private OnTaskCompleted mListener;
 
     public FetchAddressTask(Context mContext, OnTaskCompleted mListener) {
         this.mContext = mContext;
@@ -24,8 +25,8 @@ private OnTaskCompleted mListener;
 
     private final String TAG = FetchAddressTask.class.getSimpleName();
 
-@Override
-protected String doInBackground(Location... params) {
+    @Override
+    protected String doInBackground(Location... params) {
         Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
 
         Location location = params[0];
@@ -33,43 +34,45 @@ protected String doInBackground(Location... params) {
         String resultMessage = "";
 
         try {
-        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
         } catch (IOException ioException) {
-        resultMessage = mContext.getString(R.string.service_not_available);
-        Log.e(TAG, resultMessage, ioException);
+            resultMessage = mContext.getString(R.string.service_not_available);
+            Log.e(TAG, resultMessage, ioException);
         } catch (IllegalArgumentException illegalArgumentException) {
-        resultMessage = mContext.getString(R.string.invalid_lat_long_used);
-        Log.e(TAG, resultMessage + ". " +
-        "Latitude = " + location.getLatitude() +
-        ", Longitude = " + location.getLongitude(), illegalArgumentException);
+            resultMessage = mContext.getString(R.string.invalid_lat_long_used);
+            Log.e(TAG, resultMessage + ". " +
+                    "Latitude = " + location.getLatitude() +
+                    ", Longitude = " + location.getLongitude(), illegalArgumentException);
         }
 
         if (addresses == null || addresses.size() == 0) {
-        if (resultMessage.isEmpty()) {
-        resultMessage = mContext.getString(R.string.no_address_found);
-        Log.e(TAG, resultMessage);
-        }
+            if (resultMessage.isEmpty()) {
+                resultMessage = mContext.getString(R.string.no_address_found);
+                Log.e(TAG, resultMessage);
+            }
         } else {
-        Address address = addresses.get(0);
-        ArrayList<String> addressParts = new ArrayList<>();
+            Address address = addresses.get(0);
+            ArrayList<String> addressParts = new ArrayList<>();
 
-        for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+       /* for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
         addressParts.add(address.getAddressLine(i));
-        }
+        }*/
+            addressParts.add(address.getAddressLine(0));
 
-        resultMessage = TextUtils.join("\n", addressParts);
+            String city = addresses.get(0).getAdminArea();
+            resultMessage = city;
         }
 
         return resultMessage;
-        }
+    }
 
-@Override
-protected void onPostExecute(String address) {
+    @Override
+    protected void onPostExecute(String address) {
         mListener.onTaskCompleted(address);
         super.onPostExecute(address);
-        }
+    }
 
-public interface OnTaskCompleted {
-    void onTaskCompleted(String result);
-}
+    public interface OnTaskCompleted {
+        void onTaskCompleted(String result);
+    }
 }

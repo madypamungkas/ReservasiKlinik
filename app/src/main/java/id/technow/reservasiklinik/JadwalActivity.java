@@ -57,11 +57,10 @@ public class JadwalActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     model = response.body().getReservasi();
                     if (model.size() == 0) {
-                        Toast.makeText(JadwalActivity.this, "Anda Belum Melakukan Reervasi", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JadwalActivity.this, "Anda Belum Melakukan Rervasi", Toast.LENGTH_SHORT).show();
                     } else {
                         layoutTidakAda.setVisibility(View.GONE);
                         layoutAda.setVisibility(View.VISIBLE);
-                        Toast.makeText(JadwalActivity.this, model.size()+"", Toast.LENGTH_SHORT).show();
                         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
                         adapter = new ReservasiAdapter(model,JadwalActivity.this);
                         rvReservasi.setLayoutManager(new LinearLayoutManager(JadwalActivity.this));
