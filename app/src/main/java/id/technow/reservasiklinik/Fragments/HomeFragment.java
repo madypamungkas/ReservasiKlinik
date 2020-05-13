@@ -43,6 +43,7 @@ import id.technow.reservasiklinik.API.RetrofitCorona;
 import id.technow.reservasiklinik.Adapter.MenuHomeAdapter;
 import id.technow.reservasiklinik.FetchAddressTask;
 import id.technow.reservasiklinik.MainActivity;
+import id.technow.reservasiklinik.Model.CoronaProv;
 import id.technow.reservasiklinik.Model.MenuHomeModel;
 import id.technow.reservasiklinik.Model.ResponseCorona;
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
@@ -67,7 +68,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
     TextView layoutCard, txtLokasi;
     ImageView location;
     Context mCtx;
-    private TextView txtKasus, txtSembuh, txtMeninggal;
+    ArrayList<CoronaProv> coronaProvs, coronaProvs2;
+    private TextView txtKasus, txtSembuh, txtMeninggal, txtValue3loc, txtValue2loc, txtValue1loc;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final String TRACKING_LOCATION_KEY = "tracking_location";
     private boolean mTrackingLocation;
@@ -99,6 +101,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
         txtMeninggal = fragmentView.findViewById(R.id.txtValue3);
         txtLokasi = fragmentView.findViewById(R.id.txtLokasi);
         location = fragmentView.findViewById(R.id.location);
+        txtValue2loc = fragmentView.findViewById(R.id.txtValue2loc);
+        txtValue1loc = fragmentView.findViewById(R.id.txtValue1loc);
+        txtValue3loc = fragmentView.findViewById(R.id.txtValue3loc);
 
         UserModel userModel = SharedPrefManager.getInstance(getActivity()).getUser();
         tvName.setText("Hello, " + userModel.getName());
@@ -128,7 +133,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
                 }
             }
         };*/
-       // startTrackingLocation();
+        // startTrackingLocation();
         layoutCard.setOnClickListener(this);
         location.setOnClickListener(this);
         getCorona();
@@ -161,6 +166,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
         });
     }
 
+    public void getCoronaProv(final String prov) {
+        Call<ArrayList<CoronaProv>> call = RetrofitCorona
+                .getInstance()
+                .getApi()
+                .coronaProv("application/json");
+        call.enqueue(new Callback<ArrayList<CoronaProv>>() {
+            @Override
+            public void onResponse(Call<ArrayList<CoronaProv>> call, Response<ArrayList<CoronaProv>> response) {
+                if (response.isSuccessful()) {
+                    coronaProvs = response.body();
+                    coronaProvs2 = new ArrayList<CoronaProv>();
+
+                    for (CoronaProv OL : coronaProvs) {
+                        if (OL.getAttributes().getProvinsi().contains(prov)) {
+                            coronaProvs2.add(OL);
+                        }
+                       /* Toast.makeText(getActivity(), coronaProvs.get(1).getAttributes().getKode_Provi() + " ", Toast.LENGTH_LONG).show();
+*/
+                    }
+                    txtValue1loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Posi() + " Kasus");
+                    txtValue2loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Semb() + " Kasus");
+                    txtValue3loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Meni() + " Kasus");
+
+                } else {
+                    Toast.makeText(getActivity(), response.code() + " ", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<CoronaProv>> call, Throwable t) {
+                Toast.makeText(getActivity(), t.toString() + " ", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -173,7 +214,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
                 startActivity(image);
                 break;
             case R.id.location:
-                ((MainActivity)getActivity()).loadLocation();
+                ((MainActivity) getActivity()).loadLocation();
                 break;
         }
     }
@@ -197,9 +238,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
     private void stopTrackingLocation() {
         if (mTrackingLocation) {
             mTrackingLocation = false;
-         /*   mLocationButton.setText(R.string.start_tracking_location);
-        mLocationTextView.setText(R.string.textview_hint);
-        mRotateAnim.end();*/
         }
     }
 
@@ -229,8 +267,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
                 break;
         }
     }
-    public void setLocation(String result){
+
+    public void setLocation(String result) {
         txtLokasi.setText(result);
+        getCoronaProv(result);
     }
 
    /* @Override

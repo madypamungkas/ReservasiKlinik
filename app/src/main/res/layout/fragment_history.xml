@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.HistoryFragment">
 
@@ -19,88 +19,53 @@
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_14ssp" />
+
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/layoutTidakAda"
-        android:visibility="visible"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center"
-            android:text="Belum Ada Pesan Notifikasi"/>
+            android:text="Belum Ada Pesan Notifikasi"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layoutAda"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layoutAda"
-        android:visibility="gone"
-        android:orientation="vertical">
-        <RelativeLayout
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/txtTitle">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:fillViewport="true">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutSearch"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/rvReservasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:hint="Cari Nama"
-                android:textColorHint="@color/gray"
-                android:visibility="gone"
-                app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeColor="@color/gray"
-                app:boxStrokeErrorColor="@color/red"
-                app:boxStrokeWidth="@dimen/_1sdp"
-                app:errorTextColor="@color/black"
-                app:hintTextColor="@color/gray">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/_50sdp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:scrollbarThumbHorizontal="@null"
+                android:scrollbarThumbVertical="@null">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/black"
+            </androidx.recyclerview.widget.RecyclerView>
 
-                    android:textCursorDrawable="@drawable/cursor_color"
-                    android:textSize="@dimen/_12ssp" />
+        </androidx.core.widget.NestedScrollView>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layoutSearch"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:fillViewport="true">
-
-
-                <androidx.recyclerview.widget.RecyclerView
-
-                    android:id="@+id/rvReservasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:nestedScrollingEnabled="false"
-                    android:orientation="vertical"
-                    android:scrollbarThumbHorizontal="@null"
-                    android:scrollbarThumbVertical="@null">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-
-            </androidx.core.widget.NestedScrollView>
-
-
-        </RelativeLayout>
     </LinearLayout>
 
 

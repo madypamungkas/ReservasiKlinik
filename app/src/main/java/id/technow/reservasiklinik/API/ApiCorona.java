@@ -2,6 +2,7 @@ package id.technow.reservasiklinik.API;
 
 import java.util.ArrayList;
 
+import id.technow.reservasiklinik.Model.CoronaProv;
 import id.technow.reservasiklinik.Model.ResponseCorona;
 import id.technow.reservasiklinik.Model.ResponseListPasien;
 import retrofit2.Call;
@@ -15,9 +16,8 @@ public interface ApiCorona {
             @Header("Accept") String accept
     );
 
-    @GET("indonesia/{provinsi}")
-    Call<ArrayList<ResponseCorona>> coronaProv(
-            @Header("Accept") String accept,
-            @Path("provinsi") String provinsi
+    @GET("indonesia/provinsi")
+    Call<ArrayList<CoronaProv>> coronaProv(
+            @Header("Accept") String accept
     );
 }
