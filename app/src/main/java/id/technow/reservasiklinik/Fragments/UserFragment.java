@@ -99,56 +99,56 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         }
     }
 
- /*   @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        EasyImage.handleActivityResult(requestCode, resultCode, data, getActivity(), new DefaultCallback() {
-            @Override
-            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-                CropImage.activity(Uri.fromFile(imageFile))
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setCropShape(CropImageView.CropShape.OVAL)
-                        .setFixAspectRatio(true)
-                        .start(getActivity());
-            }
+    /*   @Override
+       public void onActivityResult(int requestCode, int resultCode, Intent data) {
+           super.onActivityResult(requestCode, resultCode, data);
+           EasyImage.handleActivityResult(requestCode, resultCode, data, getActivity(), new DefaultCallback() {
+               @Override
+               public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
+                   CropImage.activity(Uri.fromFile(imageFile))
+                           .setGuidelines(CropImageView.Guidelines.ON)
+                           .setCropShape(CropImageView.CropShape.OVAL)
+                           .setFixAspectRatio(true)
+                           .start(getActivity());
+               }
 
-            @Override
-            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
-                super.onImagePickerError(e, source, type);
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+               @Override
+               public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                   super.onImagePickerError(e, source, type);
+                   Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+               }
 
-            @Override
-            public void onCanceled(EasyImage.ImageSource source, int type) {
-                super.onCanceled(source, type);
-            }
-        });
+               @Override
+               public void onCanceled(EasyImage.ImageSource source, int type) {
+                   super.onCanceled(source, type);
+               }
+           });
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
-                imgValue = new File(resultUri.getPath());
+           if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+               CropImage.ActivityResult result = CropImage.getActivityResult(data);
+               if (resultCode == RESULT_OK) {
+                   Uri resultUri = result.getUri();
+                   imgValue = new File(resultUri.getPath());
 
-                Picasso.get()
-                        .load(new File(resultUri.getPath()))
-                        //   .error(R.drawable.ic_close)
-                        .resize(500, 500)
-                        .centerInside()
-                        .noFade()
-                        .into(avatar);
-                //avatar = 0;
-                //uploadFoto();
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
+                   Picasso.get()
+                           .load(new File(resultUri.getPath()))
+                           //   .error(R.drawable.ic_close)
+                           .resize(500, 500)
+                           .centerInside()
+                           .noFade()
+                           .into(avatar);
+                   //avatar = 0;
+                   //uploadFoto();
+               } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                   Exception error = result.getError();
 
-                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }
+                   Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+               }
+           }
 
-    }
+       }
 
-*/
+   */
     public String imgToString() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String filePath = imgValue.getPath();

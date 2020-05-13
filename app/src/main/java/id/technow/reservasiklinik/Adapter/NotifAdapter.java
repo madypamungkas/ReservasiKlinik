@@ -57,6 +57,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifVH> {
 
         }
     }
+
     private String getInitials(String name) {
         String[] nameParts = name.split(" ");
         String firstName = nameParts[0];

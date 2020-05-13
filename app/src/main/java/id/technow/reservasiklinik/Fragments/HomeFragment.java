@@ -182,8 +182,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
                         if (OL.getAttributes().getProvinsi().contains(prov)) {
                             coronaProvs2.add(OL);
                         }
-                       /* Toast.makeText(getActivity(), coronaProvs.get(1).getAttributes().getKode_Provi() + " ", Toast.LENGTH_LONG).show();
-*/
+                        /* Toast.makeText(getActivity(), coronaProvs.get(1).getAttributes().getKode_Provi() + " ", Toast.LENGTH_LONG).show();
+                         */
                     }
                     txtValue1loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Posi() + " Kasus");
                     txtValue2loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Semb() + " Kasus");

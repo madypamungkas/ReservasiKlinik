@@ -23,7 +23,7 @@ import id.technow.reservasiklinik.Model.DataPasienModel;
 import id.technow.reservasiklinik.Model.PasienModel;
 import id.technow.reservasiklinik.R;
 
-public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.PasienVH>  {
+public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.PasienVH> {
     private int mSelectedItem = -1;
     Context mCtx;
     ArrayList<PasienModel> dataPasienModels;
@@ -112,6 +112,7 @@ public class DataPasienAdapter extends RecyclerView.Adapter<DataPasienAdapter.Pa
             itemView.setOnClickListener(l);
         }
     }
+
     private String getInitials(String name) {
         String[] nameParts = name.split(" ");
         String firstName = nameParts[0];

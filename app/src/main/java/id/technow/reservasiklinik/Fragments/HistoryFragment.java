@@ -69,7 +69,7 @@ public class HistoryFragment extends Fragment {
 
         if (json != "notif") {
             models = gson.fromJson(json, type);
-            if (models.size() ==0) {
+            if (models.size() == 0) {
                 Toast.makeText(getActivity(), "Tidak Ada Notifikasi", Toast.LENGTH_SHORT).show();
 
             } else {

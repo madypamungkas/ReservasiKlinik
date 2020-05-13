@@ -10,7 +10,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitCorona { private static final String BASE_URL = "https://api.kawalcorona.com/";
-    //private static final String BASE_URL = "https://psikologi.ridwan.info/api/";
     //private static final String BASE_URL = "http://10.33.35.204/ruko/public/api/";
 
     private static RetrofitCorona mInstance;

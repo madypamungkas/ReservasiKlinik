@@ -45,7 +45,7 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
     public void onBindViewHolder(@NonNull final ListPasienVH holder, int position) {
         final PasienModel model = dataPasienModels.get(position);
         holder.txtName.setText(model.getNama());
-        holder.txtNomor.setText("NIK : "+model.getNik());
+        holder.txtNomor.setText("NIK : " + model.getNik());
         holder.txtInisial.setText(getInitials(model.getNama()));
         holder.id = model.getId();
         holder.rbChoose.setChecked(position == mSelectedItem);
@@ -56,7 +56,7 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
             }
         });
         if (position == mSelectedItem) {
-            if(model.getNik()!=null){
+            if (model.getNik() != null) {
                 Intent intent = new Intent(mCtx, ReservasiActivity.class);
                 intent.putExtra("idPasien", model.getId().toString());
                 intent.putExtra("namaPasien", model.getNama());
@@ -64,7 +64,7 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
                 intent.putExtra("bpjsPasien", model.getNo_bpjs());
                 intent.putExtra("hpPasien", model.getNo_telepon());
                 mCtx.startActivity(intent);
-            }else {
+            } else {
                 Toast.makeText(mCtx, "Lengkapi Data Diri Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mCtx, EditDataPasien.class);
                 intent.putExtra("idPasien", model.getId().toString());
@@ -79,7 +79,7 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
             //holder.layoutMore.setVisibility(View.GONE);
         }
         if (holder.rbChoose.isChecked()) {
-            if(model.getNik()!=null){
+            if (model.getNik() != null) {
                 Intent intent = new Intent(mCtx, ReservasiActivity.class);
                 intent.putExtra("idPasien", model.getId().toString());
                 intent.putExtra("namaPasien", model.getNama());
@@ -87,7 +87,7 @@ public class ListPasienAdapter extends RecyclerView.Adapter<ListPasienAdapter.Li
                 intent.putExtra("bpjsPasien", model.getNo_bpjs());
                 intent.putExtra("hpPasien", model.getNo_telepon());
                 mCtx.startActivity(intent);
-            }else {
+            } else {
                 Toast.makeText(mCtx, "Lengkapi Data Diri Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mCtx, EditDataPasien.class);
                 intent.putExtra("idPasien", model.getId().toString());

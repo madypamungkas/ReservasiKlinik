@@ -43,7 +43,7 @@ public class PoliAdapter extends RecyclerView.Adapter<PoliAdapter.PoliVH> {
         if (position == mSelectedItem) {
             holder.placeA.setCardBackgroundColor(Color.parseColor("#FFB100"));
             if (mCtx instanceof ReservasiActivity) {
-                ((ReservasiActivity) mCtx).PoliSetting("Poli "+Poli.getPoli(), Poli.getId());
+                ((ReservasiActivity) mCtx).PoliSetting("Poli " + Poli.getPoli(), Poli.getId());
             }
 
         } else {
