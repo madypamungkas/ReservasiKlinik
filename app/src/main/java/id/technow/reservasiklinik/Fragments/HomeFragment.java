@@ -42,8 +42,10 @@ import id.technow.reservasiklinik.API.RetrofitClient;
 import id.technow.reservasiklinik.API.RetrofitCorona;
 import id.technow.reservasiklinik.Adapter.MenuHomeAdapter;
 import id.technow.reservasiklinik.FetchAddressTask;
+import id.technow.reservasiklinik.LoginActivity;
 import id.technow.reservasiklinik.MainActivity;
 import id.technow.reservasiklinik.Model.CoronaProv;
+import id.technow.reservasiklinik.Model.CoronaWidget;
 import id.technow.reservasiklinik.Model.MenuHomeModel;
 import id.technow.reservasiklinik.Model.ResponseCorona;
 import id.technow.reservasiklinik.Model.ResponseEditPasien;
@@ -75,7 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
     private boolean mTrackingLocation;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
-
+    String provPos, provMen, provSembuh, indPos, indMen, indSembuh, provinsi;
 
     public HomeFragment() {
     }
@@ -150,6 +152,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
             public void onResponse(Call<ArrayList<ResponseCorona>> call, Response<ArrayList<ResponseCorona>> response) {
                 if (response.isSuccessful()) {
                     ResponseCorona responseCorona = response.body().get(0);
+                    indSembuh = responseCorona.getSembuh() + " Kasus";
+                    indPos = responseCorona.getPositif() + " Kasus";
+                    indMen = responseCorona.getMeninggal() + " Kasus";
+
                     txtKasus.setText(responseCorona.getPositif() + " Kasus");
                     txtSembuh.setText(responseCorona.getSembuh() + " Kasus");
                     txtMeninggal.setText(responseCorona.getMeninggal() + " Kasus");
@@ -185,6 +191,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
                         /* Toast.makeText(getActivity(), coronaProvs.get(1).getAttributes().getKode_Provi() + " ", Toast.LENGTH_LONG).show();
                          */
                     }
+                    provPos = coronaProvs2.get(0).getAttributes().getKasus_Posi() + " Kasus";
+                    provSembuh = coronaProvs2.get(0).getAttributes().getKasus_Semb() + " Kasus";
+                    provMen = coronaProvs2.get(0).getAttributes().getKasus_Meni() + " Kasus";
+                    provinsi = prov;
                     txtValue1loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Posi() + " Kasus");
                     txtValue2loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Semb() + " Kasus");
                     txtValue3loc.setText(coronaProvs2.get(0).getAttributes().getKasus_Meni() + " Kasus");
@@ -215,7 +225,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
                 break;
             case R.id.location:
                 ((MainActivity) getActivity()).loadLocation();
-                break;
+               break;
         }
     }
 
@@ -273,7 +283,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener/*, Fe
         getCoronaProv(result);
     }
 
-   /* @Override
+    public void loadCoronaWidget(String result) {
+        txtLokasi.setText(result);
+        getCoronaProv(result);
+        getCorona();
+        CoronaWidget coronaWidget = new CoronaWidget(indPos, indSembuh, indMen, provPos, provMen, provSembuh, provinsi);
+        SharedPrefManager.getInstance(getActivity()).saveCorona(coronaWidget);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+    /* @Override
     public void onTaskCompleted(String result) {
         Toast.makeText(getActivity(), result + " ", Toast.LENGTH_LONG).show();
         if (mTrackingLocation) {

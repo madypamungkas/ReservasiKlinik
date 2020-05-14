@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import id.technow.reservasiklinik.Model.CoronaWidget;
 import id.technow.reservasiklinik.Model.UserModel;
 
 public class SharedPrefManager {
@@ -22,7 +23,31 @@ public class SharedPrefManager {
         }
         return mInstance;
     }
-
+    public void saveCorona(CoronaWidget coronaWidget){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("indPos", coronaWidget.getIndPos());
+        editor.putString("indSembuh", coronaWidget.getIndSembuh());
+        editor.putString("indMen", coronaWidget.getIndMen());
+        editor.putString("provPos", coronaWidget.getProvPos());
+        editor.putString("provSembuh", coronaWidget.getProvSembuh());
+        editor.putString("provMen", coronaWidget.getProvMen());
+        editor.putString("provinsi", coronaWidget.getProvinsi());
+        editor.commit();
+        editor.apply();
+    }
+    public CoronaWidget getCorona(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return new CoronaWidget(
+                sharedPreferences.getString("indPos", "Memuat.."),
+                sharedPreferences.getString("indSembuh", "Memuat.."),
+                sharedPreferences.getString("indMen", "Memuat.."),
+                sharedPreferences.getString("provPos", "Memuat.."),
+                sharedPreferences.getString("provSembuh", "Memuat.."),
+                sharedPreferences.getString("provMen", "Memuat.."),
+                sharedPreferences.getString("provinsi", "Memuat..")
+        );
+    }
     public void saveUser(UserModel user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -37,6 +62,7 @@ public class SharedPrefManager {
         editor.commit();
         editor.apply();
     }
+
     public void saveLocation(String location ){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

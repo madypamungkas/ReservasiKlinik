@@ -53,7 +53,6 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvReservasi"
-                    android:paddingTop="@dimen/_50sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         String countryName = addresses.get(0).getAddressLine(2);
         */
         if (mTrackingLocation) {
-            Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
             mTrackingLocation = true;
             stopTrackingLocation();
             SharedPrefManager.getInstance(this).saveLocation(result);
@@ -227,12 +227,24 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
     public void loadLocation(){
       /*  HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentById(R.id.);
         fragment.<specific_function_name>();*/
+
         if (!mTrackingLocation) {
             startTrackingLocation();
         } else {
             stopTrackingLocation();
         }
-       // Toast.makeText(MainActivity.this, "result", Toast.LENGTH_SHORT).show();
+        homeFragment.loadCoronaWidget(SharedPrefManager.getInstance(this).getLocation());
 
+        // Toast.makeText(MainActivity.this, "result", Toast.LENGTH_SHORT).show();
+
+    }
+    public void loadWidget(){
+        homeFragment.loadCoronaWidget(SharedPrefManager.getInstance(this).getLocation());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadLocation();
     }
 }

@@ -486,6 +486,8 @@
                         android:id="@+id/txtLokasi"
                         android:layout_width="0dp"
                         android:layout_weight="4.2"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/maven_pro_bold"
                         android:text="Lokasi Anda"
